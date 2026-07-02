@@ -49,8 +49,14 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 .nav-badge{margin-left:auto;font-size:10px;font-weight:700;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--bg-input);color:var(--gold-primary);display:flex;align-items:center;justify-content:center;border:1px solid var(--border-soft)}
 .nav-item.active .nav-badge{background:var(--gold-primary);color:var(--bg-deep);border-color:var(--gold-primary)}
 .nav-mini{font-size:11px;color:var(--text-muted);margin-left:auto}
-.side-foot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--border-soft);font-size:10px;color:var(--text-muted);line-height:1.5}
+.side-foot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--border-soft);font-size:10px;color:var(--text-muted);line-height:1.6}
 .side-foot b{color:var(--text-secondary);font-weight:600}
+.foot-today b{color:var(--gold-primary)}
+.side-backup{display:flex;gap:8px;margin-top:10px}
+.mini-link{flex:1;background:var(--bg-input);border:1px solid var(--border-soft);color:var(--text-secondary);font-size:10px;font-weight:600;padding:6px 8px;border-radius:6px;cursor:pointer;transition:all .15s var(--ease)}
+.mini-link:hover{color:var(--gold-bright);border-color:var(--border-mid);transform:translateY(-1px)}
+.mini-link:active{transform:scale(.95)}
+.foot-note{margin-top:8px;font-size:9px;color:var(--text-muted);opacity:.8;line-height:1.4}
 
 /* ===== VIEW / HEADERS ===== */
 .view{animation:viewIn .38s var(--ease)}
@@ -305,8 +311,14 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
     <div class="side-meta">Controladoria · Gestor de Tarefas</div>
     <nav id="nav"></nav>
     <div class="side-foot">
-      <b id="footDate"></b><br>
+      <span class="foot-today">Hoje · <b id="footDate"></b></span><br>
       Semana <b id="footWeek"></b> · <span id="footPend">0</span> pendências
+      <div class="side-backup">
+        <button class="mini-link" id="btnBackup" title="Baixar cópia de segurança (.json)">⬇ Backup</button>
+        <button class="mini-link" id="btnRestore" title="Restaurar de um arquivo .json">⬆ Restaurar</button>
+      </div>
+      <div class="foot-note">Dados salvos neste navegador. Faça backup periódico.</div>
+      <input type="file" id="fileRestore" accept="application/json,.json" style="display:none">
     </div>
   </aside>
   <main class="main" id="main"></main>
@@ -453,7 +465,35 @@ function load(){
     return s;}}catch(e){}
   return {tarefas:seedTasks(),rotinas:[],rotinaCheck:{},config:{gcalUrl:''}};
 }
-function save(){localStorage.setItem(STORE_KEY,JSON.stringify(state));updateBadges();}
+function save(){
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}
+  catch(e){toast('⚠ Não consegui salvar neste navegador. Faça um Backup (⬇) agora para não perder dados.','info');}
+  updateBadges();
+}
+/* ---------- SEGURANÇA DE DADOS: backup / restauração ---------- */
+function exportBackup(){
+  try{
+    const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='gestor_tarefas_backup_'+todayISO()+'.json';a.click();
+    toast('Backup baixado ✓ — guarde este arquivo','ok');
+  }catch(e){toast('Não consegui gerar o backup','info');}
+}
+function importBackup(file){
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const obj=JSON.parse(ev.target.result);
+      if(!obj||!Array.isArray(obj.tarefas))throw new Error('formato');
+      if(!confirm('Restaurar este backup? Isso SUBSTITUI os dados atuais ('+state.tarefas.length+' tarefas) por '+obj.tarefas.length+' tarefas do arquivo.'))return;
+      state=obj;
+      state.rotinas=state.rotinas||[];state.rotinaCheck=state.rotinaCheck||{};state.config=state.config||{gcalUrl:''};
+      state.tarefas.forEach(t=>{if(t.camada===undefined)t.camada=null;if(t.framework===undefined)t.framework=null;if(!t.tipo)t.tipo='mapear';if(t.gcal===undefined)t.gcal=false;});
+      save();render();toast('Backup restaurado ✓ ('+state.tarefas.length+' tarefas)','ok');
+    }catch(err){toast('Arquivo inválido — não foi possível restaurar','info');}
+  };
+  reader.readAsText(file);
+}
 
 /* ---------- DATE HELPERS ---------- */
 const MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
@@ -511,10 +551,15 @@ function updateBadges(){renderNav();
    WEEK TASKS (dashboard) — avulsas da semana + datadas na semana + rotinas
    ========================================================================= */
 function weekTasks(){
-  // tarefas escopo 'semana' (sem data OU com data nesta semana) + qualquer tarefa datada nesta semana
+  // Compõem o dashboard da semana:
+  // 1) tarefas avulsas (escopo 'semana') sem data;
+  // 2) qualquer tarefa com data nesta semana;
+  // 3) URGENTES de qualquer objetivo macro que ainda não foram concluídas
+  //    — ficam fixadas aqui até serem concluídas (independente de data).
   return state.tarefas.filter(t=>{
     if(t.escopo==='semana' && !t.data)return true;
     if(t.data && inCurrentWeek(t.data))return true;
+    if(!t.done && t.prioridade==='urgent' && t.escopo!=='semana')return true;
     return false;
   });
 }
@@ -630,7 +675,7 @@ function viewDashboard(){
     <div class="panel">
       <div class="panel-head">
         <div><div class="panel-title"><span class="p-ico">◈</span> Pendências da Semana</div>
-        <div class="panel-sub">Tarefas avulsas + qualquer tarefa dos objetivos com data nesta semana.</div></div>
+        <div class="panel-sub">Tarefas avulsas + datadas nesta semana + <b style="color:var(--accent-red)">urgências dos objetivos</b> (fixadas até concluir).</div></div>
         <button class="btn sm primary" data-add="semana">+ Adicionar</button>
       </div>
       <div class="panel-body">
@@ -1164,9 +1209,33 @@ function toast(msg,type){
 }
 
 /* =========================================================================
+   CONSCIÊNCIA DE DATA — o sistema acompanha o dia real, mesmo aberto o dia todo
+   ========================================================================= */
+let lastDay=todayISO();
+function checkDayChange(){
+  const d=todayISO();
+  if(d!==lastDay){
+    lastDay=d;
+    calRef=new Date();               // calendário volta ao mês atual
+    render();                        // recomputa "hoje", semana, urgências
+    toast('Virou o dia ('+fmtBR(d)+') — "Hoje", a semana e as urgências foram atualizados.','info');
+  }else{
+    updateBadges();                  // mantém rodapé/badges vivos
+  }
+}
+setInterval(checkDayChange,60000);                 // checa a cada minuto
+window.addEventListener('focus',checkDayChange);   // ao voltar pra aba
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkDayChange();}); // ao acordar do sleep
+
+/* =========================================================================
    INIT
    ========================================================================= */
 renderNav();render();
+
+// Controles de backup no rodapé (fora do #main, ligados uma vez só)
+document.getElementById('btnBackup').addEventListener('click',exportBackup);
+document.getElementById('btnRestore').addEventListener('click',()=>document.getElementById('fileRestore').click());
+document.getElementById('fileRestore').addEventListener('change',function(){if(this.files&&this.files[0]){importBackup(this.files[0]);this.value='';}});
 </script>
 </body>
 </html>
