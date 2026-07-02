@@ -148,6 +148,22 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 .rot-day.on{background:var(--gold-primary);color:var(--bg-deep);border-color:var(--gold-primary)}
 .rot-day.pick:hover{transform:scale(1.1);border-color:var(--gold-primary)}
 
+/* weekly routine table (calendário de rotinas) */
+.rweek{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.rweek-day{background:var(--bg-input);border:1px solid var(--border-soft);border-radius:9px;padding:10px 9px;min-height:110px;display:flex;flex-direction:column;gap:6px;transition:border-color .16s}
+.rweek-day.today{border-color:var(--gold-primary);background:linear-gradient(135deg,var(--bg-elevated),var(--bg-input))}
+.rweek-dow{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-secondary);padding-bottom:6px;border-bottom:1px solid var(--border-soft);display:flex;justify-content:space-between;align-items:baseline}
+.rweek-day.today .rweek-dow{color:var(--gold-bright)}
+.rweek-dow .rw-date{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;color:var(--cream-dim);font-variant-numeric:tabular-nums}
+.rchip{display:flex;align-items:flex-start;gap:7px;font-size:11px;line-height:1.35;color:var(--cream-dim);background:var(--bg-main);border:1px solid var(--border-soft);border-left:2px solid var(--accent-green);border-radius:5px;padding:6px 8px;cursor:pointer;transition:all .14s var(--ease)}
+.rchip:hover{transform:translateX(2px);border-color:var(--border-mid)}
+.rchip.done{opacity:.5;text-decoration:line-through}
+.rchip-box{width:13px;height:13px;border:1.5px solid var(--border-strong);border-radius:3px;flex-shrink:0;margin-top:1px;position:relative;transition:all .15s}
+.rchip.done .rchip-box{background:var(--accent-green);border-color:var(--accent-green)}
+.rchip.done .rchip-box::after{content:'';position:absolute;top:0;left:4px;width:3px;height:7px;border:solid var(--bg-deep);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.rweek-none{font-size:10px;color:var(--text-muted);font-style:italic;margin:auto 0}
+@media (max-width:1000px){.rweek{grid-template-columns:repeat(2,1fr)}.rweek-day{min-height:auto}}
+
 /* ===== CALENDAR ===== */
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .cal-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--cream);text-transform:capitalize}
@@ -492,7 +508,10 @@ function viewDashboard(){
 
     ${pend.filter(t=>t.prioridade==='urgent').length?`<div class="banner">🔥 <div><b>${pend.filter(t=>t.prioridade==='urgent').length} urgência(s)</b> na semana. Priorize antes das 17h30 (reuniões presenciais no café).</div></div>`:''}
 
-    <!-- ROTINA -->
+    <!-- TAREFAS DE HOJE (item 3) -->
+    ${dayPanel()}
+
+    <!-- ROTINA — lista (item 1) -->
     <div class="panel">
       <div class="panel-head">
         <div><div class="panel-title"><span class="p-ico">♺</span> Rotina de Trabalho</div>
@@ -504,15 +523,11 @@ function viewDashboard(){
       </div>
     </div>
 
-    ${riPend.length?`<div class="panel">
-      <div class="panel-head"><div class="panel-title"><span class="p-ico">☀</span> Rotina desta semana</div></div>
-      <div class="panel-body">
-        ${ri.map(r=>`<div class="task ${r.done?'done':''}">
-          <div class="checkbox ${r.done?'done':''}" data-rcheck="${r.key}"></div>
-          <div class="t-body"><div class="t-title">${esc(r.titulo)}</div>${r.desc?`<div class="t-desc">${esc(r.desc)}</div>`:''}
-          <div class="t-tags"><span class="pill routine">Rotina</span><span class="pill date">${DOW[r.dow]} ${fmtBR(r.iso)}</span></div></div>
-        </div>`).join('')}
-      </div>
+    <!-- ROTINA DA SEMANA — tabela estilo calendário (item 2) -->
+    ${state.rotinas.filter(r=>r.ativo!==false).length?`<div class="panel">
+      <div class="panel-head"><div><div class="panel-title"><span class="p-ico">▦</span> Rotina desta semana</div>
+      <div class="panel-sub">Cada dia com seus afazeres de rotina. Clique para marcar como feito.</div></div></div>
+      <div class="panel-body pad">${routineWeekTable(ri)}</div>
     </div>`:''}
 
     <!-- TAREFAS DA SEMANA -->
@@ -541,6 +556,47 @@ function routineRow(r){
       <button class="mini-btn del" data-del-routine="${r.id}" title="Excluir">✕</button>
     </div>
   </div>`;
+}
+
+/* Item 3 — Tarefas de HOJE: rotinas do dia + tarefas datadas hoje */
+function dayPanel(){
+  const hoje=todayISO();const d=new Date();
+  const rHoje=routineInstances().filter(r=>r.iso===hoje);
+  const tHoje=state.tarefas.filter(t=>t.data===hoje);
+  const order={urgent:0,high:1,dep:2,mid:3,low:4};
+  const pend=tHoje.filter(t=>!t.done).sort((a,b)=>(order[a.prioridade]??5)-(order[b.prioridade]??5));
+  const fin=tHoje.filter(t=>t.done);
+  const rot=rHoje.map(r=>`<div class="task ${r.done?'done':''}">
+      <div class="checkbox ${r.done?'done':''}" data-rcheck="${r.key}"></div>
+      <div class="t-body"><div class="t-title">${esc(r.titulo)}</div>${r.desc?`<div class="t-desc">${esc(r.desc)}</div>`:''}
+      <div class="t-tags"><span class="pill routine">Rotina</span></div></div>
+    </div>`).join('');
+  const corpo=(rot+pend.map(taskRow).join('')+fin.map(taskRow).join(''))
+    || '<div class="empty"><span class="big">◷</span>Nada agendado para hoje. Sem rotinas nem tarefas com data de hoje.</div>';
+  return `<div class="panel">
+    <div class="panel-head">
+      <div><div class="panel-title"><span class="p-ico">◷</span> Tarefas de Hoje</div>
+      <div class="panel-sub">${DOW[d.getDay()]}, ${d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'})} · rotinas do dia + tarefas com esta data</div></div>
+      <button class="btn sm primary" data-add="semana" data-today="1">+ Adicionar hoje</button>
+    </div>
+    <div class="panel-body">${corpo}</div>
+  </div>`;
+}
+
+/* Item 2 — tabela semanal de rotinas (Seg..Dom) */
+function routineWeekTable(ri){
+  const[mon]=weekRange(new Date());const hoje=todayISO();
+  let cells='';
+  for(let i=0;i<7;i++){
+    const d=new Date(mon);d.setDate(mon.getDate()+i);const iso=isoOf(d);
+    const doDia=ri.filter(r=>r.iso===iso);
+    const chips=doDia.length?doDia.map(r=>`<div class="rchip ${r.done?'done':''}" data-rcheck="${r.key}"><span class="rchip-box"></span><span>${esc(r.titulo)}</span></div>`).join('')
+      :'<div class="rweek-none">—</div>';
+    cells+=`<div class="rweek-day ${iso===hoje?'today':''}">
+      <div class="rweek-dow"><span>${DOW[d.getDay()]}</span><span class="rw-date">${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}</span></div>
+      ${chips}</div>`;
+  }
+  return `<div class="rweek">${cells}</div>`;
 }
 
 /* ---------- OBJETIVO ---------- */
@@ -653,7 +709,7 @@ function wire(){
   // routine check
   m.querySelectorAll('[data-rcheck]').forEach(el=>el.onclick=()=>{const k=el.dataset.rcheck;if(state.rotinaCheck[k])delete state.rotinaCheck[k];else state.rotinaCheck[k]=true;save();render();});
   // add task
-  m.querySelectorAll('[data-add]').forEach(el=>el.onclick=()=>openTaskModal(null,el.dataset.add));
+  m.querySelectorAll('[data-add]').forEach(el=>el.onclick=()=>openTaskModal(null,el.dataset.add,el.dataset.today?todayISO():undefined));
   // edit / delete
   m.querySelectorAll('[data-edit]').forEach(el=>el.onclick=(e)=>{e.stopPropagation();openTaskModal(el.dataset.edit);});
   m.querySelectorAll('[data-del]').forEach(el=>el.onclick=(e)=>{e.stopPropagation();delTask(el.dataset.del);});
