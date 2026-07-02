@@ -34,6 +34,8 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 .brand-mark::after,.brand-mark::before{content:'';position:absolute;top:50%;left:50%;width:15px;height:2px;background:var(--bg-deep);border-radius:1px}
 .brand-mark::after{transform:translate(-50%,-50%) rotate(45deg)}
 .brand-mark::before{transform:translate(-50%,-50%) rotate(-45deg)}
+.brand-logo{width:46px;height:46px;border-radius:50%;flex-shrink:0;box-shadow:0 0 18px rgba(200,161,92,.18)}
+.brand-logo svg{display:block;width:100%;height:100%;border-radius:50%}
 .brand-text{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--cream);line-height:1.2}
 .brand-text span{color:var(--gold-primary);font-style:italic;font-weight:400}
 .side-meta{font-size:9.5px;font-weight:600;letter-spacing:.16em;color:var(--text-muted);text-transform:uppercase;padding:0 8px;margin-bottom:18px}
@@ -123,6 +125,7 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 .pill.date{background:rgba(74,112,144,.12);color:var(--accent-blue);border:1px solid rgba(74,112,144,.3)}
 .pill.who{background:var(--bg-input);color:var(--text-secondary);border:1px solid var(--border-soft)}
 .pill.routine{background:rgba(106,138,80,.12);color:var(--accent-green);border:1px solid rgba(106,138,80,.35)}
+.pill.fw{background:transparent;color:var(--gold-dim);border:1px solid var(--gold-dim);text-transform:none;letter-spacing:.02em;font-weight:600;vertical-align:middle}
 
 .empty{padding:40px 26px;text-align:center;color:var(--text-muted);font-size:13px;font-style:italic;font-family:'Playfair Display',serif}
 .empty .big{font-size:30px;display:block;margin-bottom:10px;opacity:.5}
@@ -138,6 +141,24 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 .obj-hero{background:linear-gradient(135deg,var(--bg-elevated) 0%,var(--bg-card) 100%);border:1px solid var(--border-mid);border-radius:12px;padding:26px 30px;margin-bottom:24px;display:flex;gap:24px;align-items:flex-start}
 .obj-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--gold-primary);line-height:1;font-style:italic;flex-shrink:0;min-width:64px}
 .obj-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-primary);padding:5px 12px;border:1px solid var(--gold-dim);border-radius:4px;background:var(--bg-input);white-space:nowrap}
+
+/* ===== OBJETIVO 1 · CAMADAS ===== */
+.o1-filter{display:flex;flex-wrap:wrap;gap:8px}
+.fchip{font-size:11px;font-weight:700;letter-spacing:.04em;padding:7px 14px;border-radius:20px;border:1px solid var(--border-soft);background:var(--bg-input);color:var(--text-secondary);cursor:pointer;transition:all .15s var(--ease);user-select:none}
+.fchip:hover{transform:translateY(-1px);border-color:var(--border-mid);color:var(--cream-dim)}
+.fchip.on{background:linear-gradient(135deg,var(--gold-bright),var(--gold-primary));color:var(--bg-deep);border-color:var(--gold-primary)}
+.camada-block{margin-bottom:28px}
+.camada-head{display:flex;align-items:baseline;gap:14px;margin:0 0 5px;flex-wrap:wrap}
+.camada-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--gold-bright);letter-spacing:-.01em}
+.camada-title .cn{color:var(--gold-primary);font-style:italic;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.1em;margin-right:2px}
+.camada-prog{font-size:11px;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.camada-line{height:1px;background:linear-gradient(90deg,var(--gold-dim),transparent 70%);margin:0 0 6px}
+/* seção estruturar */
+.estruturar{background:var(--bg-deep);border:1px solid var(--border-soft);border-top:2px dashed var(--gold-primary);border-radius:2px 2px 12px 12px;padding:22px 0 8px;margin-top:14px;overflow:hidden}
+.estruturar-head{padding:0 26px 10px}
+.estruturar-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--cream)}
+.estruturar-title em{font-style:italic;color:var(--gold-bright);font-weight:600}
+.estruturar-sub{font-size:12.5px;color:var(--text-secondary);font-style:italic;font-family:'Playfair Display',serif;margin-top:3px}
 
 /* ===== ROUTINE ===== */
 .rot-item{display:flex;align-items:center;gap:14px;padding:13px 26px;border-bottom:1px solid var(--border-soft);transition:background .15s}
@@ -268,7 +289,17 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 <div class="shell">
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-mark"></div>
+      <div class="brand-logo"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Café Export">
+        <circle cx="50" cy="50" r="50" fill="#2a1712"/>
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#c8a15c" stroke-width="2"/>
+        <circle cx="50" cy="50" r="41.5" fill="none" stroke="#c8a15c" stroke-width="1"/>
+        <text x="50" y="42" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="18" fill="#f5e6c8">CAFÉ</text>
+        <text x="50" y="60" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-weight="800" font-size="14" letter-spacing="0.5" fill="#f5e6c8">EXPORT</text>
+        <g transform="translate(50 75)">
+          <ellipse cx="0" cy="0" rx="14" ry="9.5" fill="#c49a3d"/>
+          <path d="M -10 -3.5 C -4 0.5, 4 -0.5, 10 3.5" fill="none" stroke="#2a1712" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg></div>
       <div class="brand-text">Grupo Café Export<br><span>· Ubon</span></div>
     </div>
     <div class="side-meta">Controladoria · Gestor de Tarefas</div>
@@ -306,19 +337,80 @@ const OBJETIVOS = [
    desc:'Cada movimentação com lastro objetivo: o mapa diz o que a área precisa, o FP&A o que a empresa pode pagar, o plano onde ela precisa chegar.'},
 ];
 
+/* ---------- CAMADAS DO OBJETIVO 1 (ordem fixa 1→7) ---------- */
+const CAMADAS = [
+  {id:'c1',n:1,short:'Pessoas e Organização',        full:'Pessoas e Organização'},
+  {id:'c2',n:2,short:'Processos e Operações',         full:'Processos e Operações'},
+  {id:'c3',n:3,short:'Financeiro',                    full:'Financeiro (base do FP&A)'},
+  {id:'c4',n:4,short:'Ativos, Passivos e Riscos Ocultos', full:'Ativos, Passivos e Riscos Ocultos'},
+  {id:'c5',n:5,short:'Comercial e Mercado',           full:'Comercial e Mercado'},
+  {id:'c6',n:6,short:'Sistemas e Dados',              full:'Sistemas e Dados'},
+  {id:'c7',n:7,short:'Cultural',                      full:'Cultural'},
+];
+
 /* ---------- SEED (sub-tarefas do V1) ---------- */
 function seedTasks(){
-  const S=(escopo,titulo,desc,prioridade,done)=>({id:uid(),escopo,titulo,desc,prioridade,done:!!done,data:null,responsavel:'',rotinaId:null,criadoEm:'seed'});
+  const S=(escopo,titulo,desc,prioridade,done)=>({id:uid(),escopo,titulo,desc,prioridade,done:!!done,data:null,responsavel:'',gcal:false,camada:null,framework:null,tipo:'mapear',rotinaId:null,criadoEm:'seed'});
+  // O1: helper para Objetivo 1 (camada, tipo, framework)
+  const O1=(camada,tipo,titulo,desc,prioridade,framework,done)=>({id:uid(),escopo:'obj1',titulo,desc,prioridade,done:!!done,data:null,responsavel:'',gcal:false,camada:camada||null,framework:framework||null,tipo:tipo||'mapear',rotinaId:null,criadoEm:'seed'});
   return [
-    // OBJ 1
-    S('obj1','Entrevistas realizadas com 11 áreas','Financeiro, Comercial, Produção, Carregamento, Compras, Logística, Faturamento, Contabilidade, RH/DP, Qualidade, Trade Marketing','mid',true),
-    S('obj1','Pesquisa de engajamento com 17 respondentes','Da sócia à base operacional — dados anonimizados incorporados ao diagnóstico','mid',true),
-    S('obj1','Consolidação das demandas do campo em Word','38 demandas organizadas por departamento com justificativa por trás de cada uma','mid',true),
-    S('obj1','Entrevista com Gerente de Estoque','Área citada por 6 outras como problema #1. Sem esta entrevista, o mapa fica com buraco central','urgent',false),
-    S('obj1','Entrevista com Elias — Trade Marketing','Candidato à Gerência de Trade Marketing. Precisa ser mapeado formalmente','high',false),
-    S('obj1','Reunião privada com Antonio — Contabilidade','Dívida R$16,8M, adiantamentos NB/Ubon, aeronave. Três perguntas em aberto do diagnóstico','urgent',false),
-    S('obj1','Identificar a Empresa 3 do grupo','Centro de custos Winthor tem 3 entidades espelhadas — apenas 2 identificadas','high',false),
-    S('obj1','Consolidar RACI por processo','Eliminar fronteiras borradas (rotina 1301, cobertura de Estoque, metas comerciais)','mid',false),
+    // ===== OBJ 1 — MAPEAMENTO TOTAL (7 camadas + estruturar) =====
+    // Camada 1 — Pessoas e Organização
+    O1('c1','mapear','Entrevistar Gerente de Estoque','Área citada por 6 outras como problema #1. Sem esta entrevista, o mapa fica com buraco central','urgent',null,false),
+    O1('c1','mapear','Entrevistar Elias — Trade Marketing','Candidato à Gerência de Trade Marketing. Validação formal do perfil','high',null,false),
+    O1('c1','mapear','Consolidar RACI por processo','Eliminar as fronteiras borradas identificadas nas entrevistas (rotina 1301, cobertura de Estoque, metas comerciais externas)','high','RACI',false),
+    O1('c1','mapear','Mapear organograma real vs. formal','Quem de fato toma decisão em cada área — muitas vezes diferente do organograma no papel','high',null,false),
+    O1('c1','mapear','Aplicar Matriz 9-Box com todos os gestores','Performance × Potencial. Base objetiva para promoções, retenção e sucessão','mid','9-Box',false),
+    O1('c1','mapear','SWOT por área','Cada gestor descreve forças, fraquezas, oportunidades e ameaças da sua diretoria. Instrumento também de engajamento','mid','SWOT',false),
+    // Camada 2 — Processos e Operações
+    O1('c2','mapear','Mapear processos-fim (as-is)','Comercial, produção, expedição. O que gera receita direto','high','As-Is',false),
+    O1('c2','mapear','Mapear processos-meio (as-is)','Compras, faturamento, logística. O que suporta a receita','high','As-Is',false),
+    O1('c2','mapear','Mapear processos de apoio (as-is)','RH, TI, contabilidade, financeiro','mid','As-Is',false),
+    O1('c2','mapear','Identificar os 7 desperdícios do Lean por área','Espera, retrabalho, movimentação, estoque, transporte, superprodução, defeitos','mid','7 Desperdícios (Lean)',false),
+    O1('c2','mapear','Mapear layout físico da fábrica','Stenisio apontou desorganização nos primeiros 4 dias. Base para 5S','mid',null,false),
+    O1('c2','mapear','Mapear fluxo de material','Do recebimento à expedição — identifica gargalos e retrabalhos','mid',null,false),
+    // Camada 3 — Financeiro (base do FP&A)
+    O1('c3','mapear','Consolidar as 3 demonstrações reais','DRE, Balanço Patrimonial, DFC — visão consolidada e por unidade de negócio','high','3 Demonstrações',false),
+    O1('c3','mapear','Análise Vertical da DRE','Estrutura de custos e despesas como % da receita — expõe concentrações','high','Análise Vertical',false),
+    O1('c3','mapear','Análise Horizontal 2024 → 2025 → 2026','Evolução mês a mês e ano a ano — expõe tendências e sazonalidades','high','Análise Horizontal',false),
+    O1('c3','mapear','Curva ABC de clientes por lucro (não por receita)','Expõe o \'cliente VIP que dá prejuízo\'. Base para renegociação e priorização comercial','high','Curva ABC / Pareto',false),
+    O1('c3','mapear','Curva ABC de fornecedores','Concentração de risco no lado da compra — expõe fornecedores críticos','mid','Curva ABC / Pareto',false),
+    O1('c3','mapear','Lucratividade por SKU','Quais produtos financiam quais. Base para decisão de mix','high','Análise de Lucratividade',false),
+    O1('c3','mapear','Lucratividade por canal','Atacado, varejo, PDV. Onde o retorno real está','mid','Análise de Lucratividade',false),
+    O1('c3','mapear','Ciclo financeiro por unidade de negócio','Café Export vs. NB Ubon vs. Empresa 3 — separados. PMR + PME − PMP','high','Ciclo Financeiro',false),
+    O1('c3','mapear','Revisão completa do plano de contas','Hoje é o mesmo para as duas empresas — precisa refletir realidade operacional de cada uma','mid',null,false),
+    O1('c3','mapear','Margem de contribuição por linha','Custos variáveis vs. fixos. Base para decisão de mix e precificação','mid','Margem de Contribuição',false),
+    // Camada 4 — Ativos, Passivos e Riscos Ocultos
+    O1('c4','mapear','Reunião privada com Antonio — dívida NB / Ubon','Dívida R$16,8M, adiantamentos intercompany. Três perguntas em aberto do diagnóstico','urgent',null,false),
+    O1('c4','mapear','Investigar aeronave','Ativo não contabilizado. Risco societário e fiscal','urgent',null,false),
+    O1('c4','mapear','Mapear adiantamentos intercompany NB / Ubon','Fluxo entre razões sociais. Documentar contratos e fundamentos','high',null,false),
+    O1('c4','mapear','Identificar a Empresa 3 do grupo','3º CNPJ presente no centro de custos Winthor — ainda não identificada','high',null,false),
+    O1('c4','mapear','Ativo imobilizado real vs. contábil','O que a empresa tem de verdade vs. o que a contabilidade registra','mid',null,false),
+    O1('c4','mapear','Mapa de contratos vigentes','Prazos, cláusulas de renovação, riscos de rescisão','mid',null,false),
+    O1('c4','mapear','Contingências fiscais consolidadas','PIS/COFINS incorreto (em correção por Antonio) + revisão fiscal ampla','high',null,false),
+    O1('c4','mapear','Passivo trabalhista potencial','\'Pagamentos por fora\' identificado na entrevista de DP. Dimensionar exposição','high',null,false),
+    O1('c4','mapear','Matriz de riscos consolidada','Probabilidade × Impacto por categoria (fiscal, trabalhista, sanitário, comercial, societário)','mid','Matriz de Riscos',false),
+    // Camada 5 — Comercial e Mercado
+    O1('c5','mapear','Concentração de clientes','Quantos % da receita vêm dos top 5, 10, 20 clientes. Risco de dependência','mid','Análise de Concentração',false),
+    O1('c5','mapear','Concentração de fornecedores','Mesmo raciocínio no lado da compra. Risco de suprimento','mid','Análise de Concentração',false),
+    O1('c5','mapear','Share regional real por categoria','Café tradicional, cápsulas, NB. Base para plano estratégico de crescimento','mid',null,false),
+    O1('c5','mapear','Mapa de concorrentes diretos e indiretos','Quem opera no mesmo canal, com que preço, com que estrutura','mid',null,false),
+    O1('c5','mapear','Cenário do café como commodity','Projeção de PMV para 12-24 meses. Impacto direto na margem','mid',null,false),
+    // Camada 6 — Sistemas e Dados
+    O1('c6','mapear','Auditoria de rotinas Winthor por área','Quais são usadas, quais estão pagas e ociosas, quais poderiam trazer valor imediato','mid',null,false),
+    O1('c6','mapear','Gaps de sistemas por departamento','Qualidade sem sistema, Produção sem sistema, RH em migração para Metadados','mid',null,false),
+    O1('c6','mapear','Fluxo de dados entre áreas','Onde a informação se perde entre um sistema e outro','mid',null,false),
+    O1('c6','mapear','Backup e segurança de dados','Mapear vulnerabilidades — proteção mínima para uma operação de R$217M','mid',null,false),
+    // Camada 7 — Cultural
+    O1('c7','mapear','Consolidar achados da pesquisa de engajamento','17 respondentes — reconhecimento, feedback, futuro. Base cultural do diagnóstico','mid',null,true),
+    O1('c7','mapear','Mapear rituais existentes vs. necessários','Hoje só o Comercial tem ritual formal. Definir cadência por área','mid',null,false),
+    O1('c7','mapear','Documentar comportamentos observados','Gestão no boca a boca, subnotificação de NCs, HE manipulada. Base do plano de intervenção cultural','mid',null,false),
+    // Estruturar (curto prazo)
+    O1(null,'estruturar','Recompor organograma formal','Emerge do RACI + 9-Box + análise real vs. formal. Depende das camadas 1 e 3','high',null,false),
+    O1(null,'estruturar','Almoxarifado geral','Materiais de escritório e consumo (resmas, clips, cartuchos). Dimensionamento via análise de compras recorrentes no Winthor','mid',null,false),
+    O1(null,'estruturar','Almoxarifado de manutenção','Peças críticas de maquinário para evitar parada de produção. Demanda identificada por Compras','high',null,false),
+    O1(null,'estruturar','Departamento de Cobrança','Endereça inadimplência de 6% e crescente. Análise prévia: carteira por faixa de atraso, cliente, vendedor','urgent',null,false),
+    O1(null,'estruturar','Sala de atendimento do RH','Demanda direta da Supervisora de RH. Custo baixo, impacto imediato em confidencialidade e clima','mid',null,false),
     // OBJ 2
     S('obj2','Centro de custos Winthor ativo — desde 04/06/2026','Rel. 581 · 3 empresas · 5 diretorias · em coleta de dados','mid',true),
     S('obj2','Consolidar 3 meses de centro de custos','Jun · Jul · Ago 2026 — base para primeira análise real por diretoria','dep',false),
@@ -351,11 +443,14 @@ function seedTasks(){
 }
 
 /* ---------- STATE ---------- */
-const STORE_KEY='cafe_tarefas_v2';
+const STORE_KEY='cafe_tarefas_v3';
 function uid(){return 't'+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);}
 let state=load();
 function load(){
-  try{const raw=localStorage.getItem(STORE_KEY);if(raw){const s=JSON.parse(raw);s.tarefas=s.tarefas||[];s.rotinas=s.rotinas||[];s.rotinaCheck=s.rotinaCheck||{};s.config=s.config||{gcalUrl:''};return s;}}catch(e){}
+  try{const raw=localStorage.getItem(STORE_KEY);if(raw){const s=JSON.parse(raw);s.tarefas=s.tarefas||[];s.rotinas=s.rotinas||[];s.rotinaCheck=s.rotinaCheck||{};s.config=s.config||{gcalUrl:''};
+    // migração: garante os campos novos em tarefas antigas
+    s.tarefas.forEach(t=>{if(t.camada===undefined)t.camada=null;if(t.framework===undefined)t.framework=null;if(!t.tipo)t.tipo='mapear';if(t.gcal===undefined)t.gcal=false;});
+    return s;}}catch(e){}
   return {tarefas:seedTasks(),rotinas:[],rotinaCheck:{},config:{gcalUrl:''}};
 }
 function save(){localStorage.setItem(STORE_KEY,JSON.stringify(state));updateBadges();}
@@ -390,6 +485,7 @@ const VIEWS=[
 ];
 let current='dashboard';
 let calRef=new Date();
+let obj1Filter='todas';
 
 function renderNav(){
   const nav=document.getElementById('nav');
@@ -461,7 +557,7 @@ function taskRow(t){
   return `<div class="task ${t.done?'done':''}" data-id="${t.id}">
     <div class="checkbox ${t.done?'done':''}" data-toggle="${t.id}"></div>
     <div class="t-body">
-      <div class="t-title">${esc(t.titulo)}</div>
+      <div class="t-title">${esc(t.titulo)}${t.framework?` <span class="pill fw">${esc(t.framework)}</span>`:''}</div>
       ${t.desc?`<div class="t-desc">${esc(t.desc)}</div>`:''}
       <div class="t-tags">${tags.join('')}</div>
     </div>
@@ -599,8 +695,87 @@ function routineWeekTable(ri){
   return `<div class="rweek">${cells}</div>`;
 }
 
+/* ---------- OBJETIVO 1 · MAPEAMENTO EM CAMADAS ---------- */
+function viewObjetivo1(){
+  const o=OBJETIVOS[0];
+  const ts=state.tarefas.filter(t=>t.escopo==='obj1');
+  const done=ts.filter(t=>t.done).length;
+  const pct=ts.length?Math.round(done/ts.length*100):0;
+  const order={urgent:0,high:1,dep:2,mid:3,low:4};
+  const sortT=arr=>[...arr].sort((a,b)=>(a.done-b.done)||((order[a.prioridade]??5)-(order[b.prioridade]??5)));
+  const isMap=t=>(t.tipo||'mapear')!=='estruturar';
+  const f=obj1Filter;
+
+  // chips de filtro
+  const chips=[{id:'todas',lb:'Todas'},...CAMADAS.map(c=>({id:c.id,lb:'C'+c.n})),{id:'estruturar',lb:'Estruturar'}];
+  const chipsHtml=chips.map(c=>`<div class="fchip ${f===c.id?'on':''}" data-fchip="${c.id}">${c.lb}</div>`).join('');
+
+  const camBlock=(cid)=>{
+    const cam=CAMADAS.find(c=>c.id===cid);
+    const list=sortT(ts.filter(t=>isMap(t)&&t.camada===cid));
+    const d=list.filter(t=>t.done).length;
+    return `<div class="camada-block">
+      <div class="camada-head"><div class="camada-title"><span class="cn">Camada ${cam.n}</span> · ${esc(cam.short)}</div>
+        <div class="camada-prog">${d} de ${list.length} concluída${list.length===1?'':'s'}</div></div>
+      <div class="camada-line"></div>
+      <div class="panel" style="margin:0"><div class="panel-body">
+        ${list.length?list.map(taskRow).join(''):'<div class="empty" style="padding:20px"><span class="big">＋</span>Sem tarefas nesta camada ainda.</div>'}
+      </div></div>
+    </div>`;
+  };
+  const geralList=sortT(ts.filter(t=>isMap(t)&&!t.camada));
+  const geralBlock=`<div class="camada-block">
+    <div class="camada-head"><div class="camada-title"><span class="cn">Geral</span> · sem camada</div>
+      <div class="camada-prog">${geralList.filter(t=>t.done).length} de ${geralList.length} concluída${geralList.length===1?'':'s'}</div></div>
+    <div class="camada-line"></div>
+    <div class="panel" style="margin:0"><div class="panel-body">${geralList.map(taskRow).join('')}</div></div>
+  </div>`;
+  const est=sortT(ts.filter(t=>!isMap(t)));
+  const estHtml=`<div class="estruturar">
+    <div class="estruturar-head"><div class="estruturar-title">Estruturar <em>(curto prazo)</em></div>
+      <div class="estruturar-sub">Ações que emergem do mapeamento e caminham em paralelo.</div></div>
+    <div>${est.length?est.map(taskRow).join(''):'<div class="empty" style="padding:20px">Nenhuma ação estrutural ainda.</div>'}</div>
+  </div>`;
+
+  let sections='';
+  if(f==='estruturar'){sections=estHtml;}
+  else if(f!=='todas'){sections=camBlock(f);}
+  else{
+    if(geralList.length)sections+=geralBlock;
+    sections+=CAMADAS.map(c=>camBlock(c.id)).join('');
+    sections+=estHtml;
+  }
+
+  return `<div class="view">
+    <div class="page-eyebrow">Objetivo Macro 01</div>
+    <div class="obj-hero">
+      <div class="obj-num">01</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px">
+          <h1 class="page-title" style="font-size:30px;margin:0">${esc(o.titulo)}</h1>
+          <span class="obj-tag">${o.periodo}</span>
+        </div>
+        <p style="font-size:13.5px;color:var(--text-primary);line-height:1.6;max-width:820px">${esc(o.desc)}</p>
+        <div class="obj-progress">
+          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <div class="progress-text"><strong>${pct}%</strong> · ${done} de ${ts.length}</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+      <div class="o1-filter">${chipsHtml}</div>
+      <button class="btn sm primary" data-add="obj1">+ Adicionar tarefa</button>
+    </div>
+
+    ${sections}
+    <div class="pattern-bar"></div>
+  </div>`;
+}
+
 /* ---------- OBJETIVO ---------- */
 function viewObjetivo(id){
+  if(id==='obj1')return viewObjetivo1();
   const o=OBJETIVOS.find(o=>o.id===id);
   const ts=state.tarefas.filter(t=>t.escopo===id);
   const done=ts.filter(t=>t.done).length;
@@ -719,6 +894,7 @@ function wire(){
   m.querySelectorAll('[data-edit-routine]').forEach(el=>el.onclick=()=>openRoutineModal(el.dataset.editRoutine));
   m.querySelectorAll('[data-del-routine]').forEach(el=>el.onclick=()=>{if(confirm('Excluir esta rotina?')){state.rotinas=state.rotinas.filter(r=>r.id!==el.dataset.delRoutine);save();render();toast('Rotina removida','info');}});
   // calendar
+  m.querySelectorAll('[data-fchip]').forEach(el=>el.onclick=()=>{obj1Filter=el.dataset.fchip;render();window.scrollTo({top:0,behavior:'smooth'});});
   m.querySelectorAll('[data-cal]').forEach(el=>el.onclick=()=>{const v=+el.dataset.cal;if(v===0)calRef=new Date();else calRef=new Date(calRef.getFullYear(),calRef.getMonth()+v,1);render();});
   m.querySelectorAll('[data-day]').forEach(el=>el.onclick=(e)=>{if(e.target.closest('.cal-ev'))return;openTaskModal(null,'semana',el.dataset.day);});
   m.querySelectorAll('[data-ics]').forEach(el=>el.onclick=exportICS);
@@ -744,6 +920,9 @@ function openTaskModal(editId,defScope,defDate){
     data:t?(t.data||''):(defDate||''),
     responsavel:t?t.responsavel:'',
     gcal:t?!!t.gcal:false,
+    camada:t?(t.camada||''):'',
+    tipo:t?(t.tipo||'mapear'):'mapear',
+    framework:t?(t.framework||''):'',
   };
   const scopes=[{id:'semana',title:'Tarefas da Semana',sub:'Só no dashboard'},...OBJETIVOS.map(o=>({id:o.id,title:'Obj '+o.num+' · '+o.titulo.split(' —')[0],sub:o.periodo}))];
   const rosterOpts=(()=>{
@@ -777,6 +956,27 @@ function openTaskModal(editId,defScope,defDate){
           <div class="field" style="margin:0"><label>Responsável</label><select id="fResp">${rosterOpts}</select></div>
         </div>
 
+        <div class="field" id="obj1Fields" style="display:${draft.escopo==='obj1'?'block':'none'}">
+          <label>Mapeamento (Objetivo 1)</label>
+          <div class="field-row">
+            <div class="field" style="margin:0"><label style="font-size:10px;letter-spacing:.06em">Camada</label>
+              <select id="fCamada">
+                <option value="">Sem camada (Geral)</option>
+                ${CAMADAS.map(c=>`<option value="${c.id}" ${draft.camada===c.id?'selected':''}>Camada ${c.n} — ${esc(c.full)}</option>`).join('')}
+              </select>
+            </div>
+            <div class="field" style="margin:0"><label style="font-size:10px;letter-spacing:.06em">Tipo</label>
+              <select id="fTipo">
+                <option value="mapear" ${draft.tipo!=='estruturar'?'selected':''}>Mapear</option>
+                <option value="estruturar" ${draft.tipo==='estruturar'?'selected':''}>Estruturar (curto prazo)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin:12px 0 0"><label style="font-size:10px;letter-spacing:.06em">Framework (opcional)</label>
+            <input type="text" id="fFramework" value="${esc(draft.framework)}" placeholder="9-Box, SWOT, Curva ABC, Análise Vertical, 7 Desperdícios...">
+          </div>
+        </div>
+
         <div class="field" style="margin-bottom:0"><label>Lembrete</label>
           <div class="gcal-ask ${draft.gcal?'on':''}" id="gcalAsk">
             <span class="ga-ico">📅</span>
@@ -800,7 +1000,7 @@ function openTaskModal(editId,defScope,defDate){
   document.getElementById('mClose').onclick=closeModal;
   document.getElementById('mCancel').onclick=closeModal;
   ovl.onclick=(e)=>{if(e.target===ovl)closeModal();};
-  ovl.querySelectorAll('[data-scope]').forEach(el=>el.onclick=()=>{draft.escopo=el.dataset.scope;ovl.querySelectorAll('[data-scope]').forEach(x=>x.classList.toggle('on',x.dataset.scope===draft.escopo));});
+  ovl.querySelectorAll('[data-scope]').forEach(el=>el.onclick=()=>{draft.escopo=el.dataset.scope;ovl.querySelectorAll('[data-scope]').forEach(x=>x.classList.toggle('on',x.dataset.scope===draft.escopo));const o1=document.getElementById('obj1Fields');if(o1)o1.style.display=draft.escopo==='obj1'?'block':'none';});
   ovl.querySelectorAll('[data-p]').forEach(el=>el.onclick=()=>{draft.prioridade=el.dataset.p;ovl.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('on',x.dataset.p===draft.prioridade));});
   const gAsk=document.getElementById('gcalAsk');
   gAsk.onclick=()=>{draft.gcal=!draft.gcal;gAsk.classList.toggle('on',draft.gcal);};
@@ -814,18 +1014,23 @@ function saveTask(){
   const data=document.getElementById('fData').value||null;
   const desc=document.getElementById('fDesc').value.trim();
   const responsavel=document.getElementById('fResp').value;
+  // Campos do Objetivo 1 (só quando escopo === 'obj1')
+  const isObj1=draft.escopo==='obj1';
+  const camada=isObj1?(document.getElementById('fCamada').value||null):null;
+  const tipo=isObj1?(document.getElementById('fTipo').value||'mapear'):'mapear';
+  const framework=isObj1?(document.getElementById('fFramework').value.trim()||null):null;
   // Lembrete Google Agenda precisa de uma data
   if(draft.gcal&&!data){toast('Escolha uma data para o lembrete do Google Agenda','info');document.getElementById('fData').focus();return;}
   let saved;
   if(draft.id){
     const t=state.tarefas.find(x=>x.id===draft.id);
     const jaLembrava=t.gcal&&t.data===data;
-    Object.assign(t,{titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal});
+    Object.assign(t,{titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal,camada,tipo,framework});
     saved=t;
     toast('Tarefa atualizada ✓','ok');
     if(draft.gcal&&data&&!jaLembrava)agendarGCal(t);
   }else{
-    saved={id:uid(),titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal,done:false,rotinaId:null,criadoEm:todayISO()};
+    saved={id:uid(),titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal,camada,tipo,framework,done:false,rotinaId:null,criadoEm:todayISO()};
     state.tarefas.push(saved);
     toast('Adicionada em '+scopeShort(draft.escopo)+(data?' · '+fmtBR(data):'')+' ✓','ok');
     if(draft.gcal&&data)agendarGCal(saved);
