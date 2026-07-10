@@ -454,16 +454,51 @@ function seedTasks(){
   ];
 }
 
+/* ---------- PACOTES DE TAREFAS (anexados 1x, sem apagar dados) ---------- */
+// Documentação de Processos — passo a passo do método (Objetivo 1 · Camada 2).
+function packDocProc(){
+  const D=(n,titulo,desc,framework)=>({id:uid(),escopo:'obj1',camada:'c2',tipo:'mapear',framework:framework||null,
+    titulo:'Doc. Processos · Passo '+n+' — '+titulo,desc,prioridade:'mid',done:false,data:null,responsavel:'',gcal:false,rotinaId:null,criadoEm:'pack:docproc'});
+  return [
+    D('00','Escolher o processo a documentar','Escolha UM processo concreto para documentar primeiro (bons candidatos: os processos-fim/meio desta camada). Documentar tudo de uma vez é erro — priorize.',null),
+    D('01','Classificar: projeto, processo ou tarefa?','Documente PROCESSOS — o "como eu faço isto?" que se repete de forma estável. Projeto tem começo-meio-fim; tarefa é o átomo. Regra: se o "como" não muda entre execuções, há um processo a documentar.','Tríade projeto/processo/tarefa'),
+    D('02','Confirmar o gatilho','Só documente se disparou o Gatilho 1 (a forma estabilizou e funciona) OU o Gatilho 2 (preciso ensinar a mesma coisa a várias pessoas). Se nenhum disparou, ainda não é hora — documentar cedo congela um caminho instável.','Gatilhos 1 e 2'),
+    D('03','Definir o autor (fonte da verdade)','Idealmente quem executa monta a 1ª versão. Se faltar tempo, faltar domínio da ferramenta, ou se quiser um terceiro olhar, use um observador externo como escriba — mas o executor continua sendo a fonte da verdade.',null),
+    D('04','Mapear o AS-IS — desenhar o fluxograma','Desenhe o fluxo das etapas REAIS (não as ideais), com ramificações, e dê um código a cada etapa (#E1, #E2...). Fidelidade brutal: registre o que É, mesmo que pareça "errado" (se pulam a etapa C, registre A·B·D·E).','AS-IS · Fluxograma'),
+    D('05','Descrever cada etapa (o "play")','Para cada código do fluxo, uma página com o passo a passo de execução daquela etapa — ainda em AS-IS. Formato livre (lista, tabela, toggle); o acoplamento é que é obrigatório.','Protocolo 2 camadas'),
+    D('06','Verificar o acoplamento','Confira: todo código do fluxo aponta para uma descrição, e toda descrição tem seu código. É isso que mantém o playbook navegável.','Acoplamento fluxo↔descrição'),
+    D('07','Calibrar a variabilidade','Posicione o processo no espectro engessado ↔ guia de sugestões. Separe o "QUÊ" (regra, inegociável) do "COMO" (sugestão, livre). Tire toda variação que NÃO exige julgamento; preserve a que exige.','Espectro de variabilidade'),
+    D('08','Definir o TO-BE','Descreva o estado-alvo: como o processo DEVERIA ser. Só agora — nunca documente direto o TO-BE.','TO-BE'),
+    D('09','Montar o plano de transição','Construa a ponte AS-IS → TO-BE: priorize quais etapas mudar primeiro, de forma faseada. Raramente se muda tudo de uma vez — nada de big-bang.','Ponte AS-IS→TO-BE'),
+    D('10','Instituir o ritual de revisão','Dois horizontes: olhos frescos levantam a mão na hora (contínuo) + régua formal mensal/trimestral comparando realizado vs. esperado por etapa. A vigilância é do líder da frente, não do executor.','Ritual de revisão'),
+    D('11','Rodar a árvore de 4 quadrantes','Onde houver discrepância, cruze: (1) segui o playbook? × (2) resultado melhor/pior? → MANTER (seguiu+melhor) · ATUALIZAR (não seguiu+melhor) · REVISAR (seguiu+pior) · SEGUIR (não seguiu+pior). A variância localiza; a matriz prescreve.','Árvore 4 quadrantes'),
+    D('12','Respeitar a realidade acima da metodologia','Se a ferramenta ou o método conflita com o processo real (ex.: o método proíbe loop e seu processo tem loop) — o método cede. Fidelidade ao real é a fonte única de valor da documentação.','Regra de ouro'),
+  ];
+}
+const PACKS={docproc:packDocProc};
+
 /* ---------- STATE ---------- */
 const STORE_KEY='cafe_tarefas_v3';
 function uid(){return 't'+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);}
 let state=load();
 function load(){
-  try{const raw=localStorage.getItem(STORE_KEY);if(raw){const s=JSON.parse(raw);s.tarefas=s.tarefas||[];s.rotinas=s.rotinas||[];s.rotinaCheck=s.rotinaCheck||{};s.config=s.config||{gcalUrl:''};
+  let s;
+  try{const raw=localStorage.getItem(STORE_KEY);if(raw){s=JSON.parse(raw);s.tarefas=s.tarefas||[];s.rotinas=s.rotinas||[];s.rotinaCheck=s.rotinaCheck||{};s.config=s.config||{gcalUrl:''};
     // migração: garante os campos novos em tarefas antigas
     s.tarefas.forEach(t=>{if(t.camada===undefined)t.camada=null;if(t.framework===undefined)t.framework=null;if(!t.tipo)t.tipo='mapear';if(t.gcal===undefined)t.gcal=false;});
-    return s;}}catch(e){}
-  return {tarefas:seedTasks(),rotinas:[],rotinaCheck:{},config:{gcalUrl:''}};
+  }}catch(e){s=null;}
+  if(!s)s={tarefas:seedTasks(),rotinas:[],rotinaCheck:{},config:{gcalUrl:''}};
+  return applyPacks(s);
+}
+// Anexa cada pacote apenas uma vez (registra em s.packs). Não apaga nada existente.
+function applyPacks(s){
+  s.packs=s.packs||[];
+  let changed=false;
+  Object.keys(PACKS).forEach(k=>{
+    if(!s.packs.includes(k)){PACKS[k]().forEach(t=>s.tarefas.push(t));s.packs.push(k);changed=true;}
+  });
+  if(changed){try{localStorage.setItem(STORE_KEY,JSON.stringify(s));}catch(e){}}
+  return s;
 }
 function save(){
   try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}
