@@ -148,6 +148,21 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 .obj-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--gold-primary);line-height:1;font-style:italic;flex-shrink:0;min-width:64px}
 .obj-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-primary);padding:5px 12px;border:1px solid var(--gold-dim);border-radius:4px;background:var(--bg-input);white-space:nowrap}
 
+/* ===== ÍNDICE (hub) ===== */
+.idx-group{margin-bottom:30px}
+.idx-group-h{font-family:'JetBrains Mono','Inter',monospace;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-primary);margin:0 0 14px;display:flex;align-items:center;gap:12px}
+.idx-group-h::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border-mid),transparent)}
+.idx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.idx-card{background:var(--bg-card);border:1px solid var(--border-soft);border-radius:12px;padding:20px 22px;cursor:pointer;transition:transform .18s var(--ease),border-color .18s,box-shadow .18s;position:relative;overflow:hidden}
+.idx-card:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:0 10px 28px rgba(0,0,0,.32)}
+.idx-card:active{transform:translateY(-1px) scale(.99)}
+.idx-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.idx-ico{font-size:20px;color:var(--gold-bright)}
+.idx-num{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--gold-dim);font-weight:600}
+.idx-urg{margin-left:auto;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-red);border:1px solid rgba(165,72,50,.4);background:rgba(165,72,50,.12);padding:3px 8px;border-radius:4px}
+.idx-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:8px}
+.idx-desc{font-size:12px;color:var(--text-secondary);line-height:1.5}
+
 /* ===== OBJETIVO 1 · CAMADAS ===== */
 .o1-filter{display:flex;flex-wrap:wrap;gap:8px}
 .fchip{font-size:11px;font-weight:700;letter-spacing:.04em;padding:7px 14px;border-radius:20px;border:1px solid var(--border-soft);background:var(--bg-input);color:var(--text-secondary);cursor:pointer;transition:all .15s var(--ease);user-select:none}
@@ -337,33 +352,162 @@ body{background:linear-gradient(180deg,var(--bg-deep) 0%,var(--bg-main) 480px)}
 const ROSTER = [{"n":"Adriana Miranda Rodrigues","f":"Auxiliar De Cozinha","a":"ADMINISTRATIVO"},{"n":"Ana Cecilia Candido De Souza Amaral","f":"Menor Aprendiz","a":"ADMINISTRATIVO"},{"n":"Antonio Carlos Lassi Lopes","f":"Aux. Administrativo","a":"ADMINISTRATIVO"},{"n":"Breno Kaua Feitosa Amorim","f":"Menor Aprendiz","a":"ADMINISTRATIVO"},{"n":"Carla Algusta Lacerda Lopes","f":"Auxiliar Administrativo","a":"ADMINISTRATIVO"},{"n":"Cecilia Augusta Lacerda Lopes","f":"Sócio Gerente","a":"ADMINISTRATIVO"},{"n":"Cristiano Augusto Lacerda Lopes","f":"Auxiliar Administrativo","a":"ADMINISTRATIVO"},{"n":"Daniel Oliveira Da Costa","f":"Menor Aprendiz","a":"ADMINISTRATIVO"},{"n":"Erik Dallas Lopes Vasconcelos","f":"Menor Aprendiz","a":"ADMINISTRATIVO"},{"n":"Fabio Afonso Da Cunha","f":"Sócio Gerente","a":"ADMINISTRATIVO"},{"n":"Kamilla Coutinho Da Conceicao","f":"Menor Aprendiz","a":"ADMINISTRATIVO"},{"n":"Marcos Antonio Da Costa","f":"Vigia Noturno","a":"ADMINISTRATIVO"},{"n":"Tatiane Martins Pereira Contursi","f":"Analista Fiscal E Contabil","a":"ADMINISTRATIVO"},{"n":"Telma Rocha De Abreu Macedo","f":"Cozinheira","a":"ADMINISTRATIVO"},{"n":"Yago Alves De Araujo","f":"Menor Aprendiz","a":"ADMINISTRATIVO"},{"n":"Yara Maria Lacerda","f":"Auxiliar Administrativo","a":"ADMINISTRATIVO"},{"n":"Zelina Alves Da Cruz","f":"Auxiliar De Serviços Gerais","a":"ADMINISTRATIVO"},{"n":"Rafael Amorim Da Cunha","f":"Encarregador De Expedição","a":"CARREGAMENTO"},{"n":"Antonio Bontempo Filho","f":"Vendedor","a":"COMERCIAL"},{"n":"Claudinei Da Silva Machado","f":"Vendedor","a":"COMERCIAL"},{"n":"Damiao De Jesus Ramos","f":"Vendedor","a":"COMERCIAL"},{"n":"Dayan Lucena Ribeiro","f":"Gerente De Vendas","a":"COMERCIAL"},{"n":"Diolino Coutinho De Oliveira","f":"Vendedor","a":"COMERCIAL"},{"n":"Elenilda Da Costa Cunha","f":"Vendedor","a":"COMERCIAL"},{"n":"Elias Lopes Ferreira","f":"Supervisor","a":"COMERCIAL"},{"n":"Fabiano Rodrigues De Oliveira","f":"Vendedor","a":"COMERCIAL"},{"n":"Fabio Ferreira","f":"Vendedor","a":"COMERCIAL"},{"n":"Flavio Afonso Da Cunha","f":"Vendedor N/comis","a":"COMERCIAL"},{"n":"Fleury Junior Da Cunha","f":"Vendedor","a":"COMERCIAL"},{"n":"Glaucia Barbosa Couto","f":"Vendedor","a":"COMERCIAL"},{"n":"Hamilton Teofilio De Araujo","f":"Vendedor N/comis","a":"COMERCIAL"},{"n":"Joao Bosco Campos","f":"Vendedor","a":"COMERCIAL"},{"n":"Joaquim Oliveira Alves","f":"Vendedor","a":"COMERCIAL"},{"n":"Jose Geraldo Rodrigues De Oliveira","f":"Vendedor","a":"COMERCIAL"},{"n":"Kleiton Laurindo Virgilio","f":"Vendedor","a":"COMERCIAL"},{"n":"Marcio Rizio De Oliveira","f":"Vendedor","a":"COMERCIAL"},{"n":"Odinar Pires Gomes Campos","f":"Vendedor","a":"COMERCIAL"},{"n":"Patrick Cirqueira Costa","f":"Gerente De Vendas","a":"COMERCIAL"},{"n":"Reis Antonio De Oliveira","f":"Vendedor","a":"COMERCIAL"},{"n":"Renato Temoteo Da Costa","f":"Vendedor","a":"COMERCIAL"},{"n":"Renes Jose De Oliveira","f":"Vendedor","a":"COMERCIAL"},{"n":"Ricardo Lima De Carvalho","f":"Vendedor","a":"COMERCIAL"},{"n":"Wilson De Oliveira Silva","f":"Vendedor","a":"COMERCIAL"},{"n":"Daienne Cristina Xavier","f":"Compradora","a":"COMPRAS"},{"n":"Diego Santos De Lavor Lima","f":"Gerente De Compras","a":"COMPRAS"},{"n":"Alexsandro Liberato Da Silva","f":"Conferente","a":"ESTOQUE"},{"n":"Clebio Barbosa Dos Santos","f":"Estoquista","a":"ESTOQUE"},{"n":"Domingos Dos Reis Rosa","f":"Conferente","a":"ESTOQUE"},{"n":"Edilair Dos Santos Rabelo","f":"Conferente","a":"ESTOQUE"},{"n":"Francisco Das Chagas Silva Melo","f":"Conferente","a":"ESTOQUE"},{"n":"Josias Moreira Da Silva Junior","f":"Estoquista","a":"ESTOQUE"},{"n":"Julio Paulo Rodrigues De Souza","f":"Conferente","a":"ESTOQUE"},{"n":"Luiz Gonzaga Dos Santos","f":"Estoquista","a":"ESTOQUE"},{"n":"Manoel De Sousa Melo","f":"Conferente","a":"ESTOQUE"},{"n":"Marcos Venicius Dias Ferreira","f":"Conferente","a":"ESTOQUE"},{"n":"Matheus Rodrigues De Andrade","f":"Estoquista","a":"ESTOQUE"},{"n":"Rafael Da Silva Dias","f":"Conferente","a":"ESTOQUE"},{"n":"Welton Rafael Ferreira","f":"Conferente","a":"ESTOQUE"},{"n":"Yuri Fonseca Costa","f":"Gerente De Transporte","a":"ESTOQUE"},{"n":"Angela Sayuri Takahara","f":"Gerente De Faturamento","a":"FATURAMENTO"},{"n":"Jorge Monteiro Gomes","f":"Auxiliar Administrativo","a":"FATURAMENTO"},{"n":"Kelvy Sousa Ramos","f":"Auxiliar Administrativo","a":"FATURAMENTO"},{"n":"Ana Lidia Abreu Damasceno","f":"Auxiliar Administrativo","a":"FINANCEIRO"},{"n":"Fausto Antonio De Oliveira","f":"Gerente Financeiro","a":"FINANCEIRO"},{"n":"Margarida Pereira De Sousa","f":"Auxiliar Administrativo","a":"FINANCEIRO"},{"n":"Antonio Francisco Dos Santos Filho","f":"Gerente De Logistica","a":"LOGISTICA"},{"n":"Francisco Anilton Dias Da Silva","f":"Supervisor De Logistica","a":"LOGISTICA"},{"n":"Leandro Dos Santos Silva","f":"Analista De Logistica","a":"LOGISTICA"},{"n":"Antonio Carlos Predolin Junior","f":"Mecanico De Manutenção Industrial","a":"MANUTENÇÃO"},{"n":"Elenilson Pereira De Sousa","f":"Operador De Maquinas","a":"MANUTENÇÃO"},{"n":"Joaquim Xavier De Oliveira","f":"Auxiliar De Manutem. Industrial","a":"MANUTENÇÃO"},{"n":"Welison Alves Venez","f":"Tecnico De Eletromecanica","a":"MANUTENÇÃO"},{"n":"Francisco Da Costa Araujo","f":"Operador De Maquinas","a":"PRODUÇÃO"},{"n":"Joao Paulo Ramos Evangelista","f":"Chefe De Produção","a":"PRODUÇÃO"},{"n":"Nadia Cristina Rosa De Jesus","f":"Chefe De Produção","a":"PRODUÇÃO"},{"n":"Stenisio Jose Batista Camara","f":"Supervisor De Produção","a":"PRODUÇÃO"},{"n":"Raquel Bruna Lima Lustosa","f":"Analista De Controle De Qualidade","a":"QUALIDADE"},{"n":"Aline Bueno De Lima","f":"Supervisor De Rh","a":"RH"},{"n":"Deuzuite Amorim Neiva","f":"Auxiliar De Escritório","a":"RH"},{"n":"Isabelly Cristina Coimbra Lima","f":"Auxiliar De Escritório","a":"RH"},{"n":"Mateus Caetano Santos","f":"Tecnico Segurança Do Trabalho","a":"RH"},{"n":"Rosimery Amorim De Sousa","f":"Analista De Dp","a":"RH"},{"n":"Gilceu Oliveira Alves","f":"Classificador De Grãos","a":"SILO"},{"n":"Pedro Paulo Sousa Junior","f":"Classificador De Grãos","a":"SILO"},{"n":"Jessica Cristina Oliveira Da Cunha","f":"Gerente De Infraestrutura De Ti","a":"T.I"},{"n":"Francisco Da Paixão Silva","f":"Auxiliar De Torrador","a":"TORRADOR"},{"n":"Francisco Ivan Fernandes Da Silva","f":"Auxiliar De Torrador","a":"TORRADOR"}];
 /* Roster: lideranças + áreas-chave (base de 206 ativos consolidada). Ajuste a lista conforme precisar atribuir a mais gente. */
 
-/* ---------- OBJETIVOS MACRO (do V1) ---------- */
-const OBJETIVOS = [
-  {id:'obj1',num:'01',titulo:'Mapeamento Total',periodo:'Jul — Ago 2026',
-   desc:'Consolidar entrevistas, processos, RACI, KPIs e riscos de todas as áreas em uma base única de conhecimento. Fundamento para tudo que vem depois.'},
-  {id:'obj2',num:'02',titulo:'Análise Financeira e Planejamento (FP&A)',periodo:'Set — Out 2026',
-   desc:'Com 3 meses de dado real do centro de custos, começar o FP&A de verdade. Primeiro produto: análise mensal por unidade de negócio.'},
-  {id:'obj3',num:'03',titulo:'Planejamento Estratégico — 5, 3 e 1 ano',periodo:'Nov — Dez 2026',
-   desc:'Do horizonte de 5 anos (visão, valuation, M&A), passando por 3 anos (capex e estrutura) até o plano de 1 ano com metas por diretoria.'},
-  {id:'obj4',num:'04',titulo:'Reorganização de Time e Organograma',periodo:'Jan 2027 →',
-   desc:'Cada movimentação com lastro objetivo: o mapa diz o que a área precisa, o FP&A o que a empresa pode pagar, o plano onde ela precisa chegar.'},
+/* ---------- TEMAS (abas) — preparação institucional p/ valuation & M&A ----------
+   Estrutura inspirada no guia em HTML: Índice + Dashboard + abas por tema. */
+const TEMAS = [
+  {id:'imediato', num:'00', ico:'⚑', grupo:'Início',       titulo:'Ação Imediata · 2 Semanas', desc:'O que fazer já para destravar o roadmap. Alinhar sócios, orçar o projeto e contratar as assessorias críticas.'},
+  {id:'gov',      num:'01', ico:'§',  grupo:'Fundação',     titulo:'Governança Societária & Jurídico', desc:'Estrutura societária limpa, S.A., acordo de acionistas e propriedade intelectual. Nada mais funciona sem isto resolvido.'},
+  {id:'contab',   num:'02', ico:'∑',  grupo:'Fundação',     titulo:'Contabilidade & Reporte', desc:'IFRS full, auditoria Big Four, 3 anos auditados, fechamento rápido e contabilidade gerencial. Define o acesso a capital.'},
+  {id:'trib',     num:'03', ico:'⟐',  grupo:'Fundação',     titulo:'Tributário', desc:'Auditoria preventiva, regularização de passivos, otimização lícita e preparo para a reforma tributária.'},
+  {id:'ambiente', num:'04', ico:'◈',  grupo:'Controles Internos', titulo:'Ambiente de Controle', desc:'A base do COSO: código de ética, segregação, canal de denúncia, conflito de interesse e independência da Controladoria.'},
+  {id:'compras',  num:'05', ico:'⇄',  grupo:'Controles Internos', titulo:'Compras & Pagamentos', desc:'Conciliação de fornecedores, três orçamentos, segregação em pagamentos, adiantamentos e duplo nível de aprovação.'},
+  {id:'receitas', num:'06', ico:'↑',  grupo:'Controles Internos', titulo:'Receitas', desc:'Controle de descontos e devoluções e reconciliação de recebimentos — onde a margem fina se defende.'},
+  {id:'contabil', num:'07', ico:'⊞',  grupo:'Controles Internos', titulo:'Controles Contábeis', desc:'Lançamentos manuais, conciliação de contas patrimoniais, intercompany e partes relacionadas.'},
+  {id:'riscos',   num:'08', ico:'⚠',  grupo:'Capacidade Institucional', titulo:'Gestão de Riscos', desc:'Matriz de riscos, hedge cambial e de commodity, risco de crédito/fornecedores, seguros e continuidade.'},
+  {id:'sistemas', num:'09', ico:'▤',  grupo:'Capacidade Institucional', titulo:'Sistemas & Tecnologia', desc:'ERP tier 1, BI, certificações de qualidade, rastreabilidade, cybersecurity e digitalização.'},
+  {id:'pessoas',  num:'10', ico:'☗',  grupo:'Capacidade Institucional', titulo:'Pessoas & Cultura', desc:'CFO, organograma, sucessão, redução da dependência do dono, conselho, comitês, remuneração e cultura.'},
+  {id:'operacoes',num:'11', ico:'⛭',  grupo:'Capacidade Institucional', titulo:'Operações & Suprimentos', desc:'Processos documentados, KPIs, certificações, rastreabilidade, ESG, sourcing e manutenção preventiva.'},
+  {id:'comercial',num:'12', ico:'◐',  grupo:'Capacidade Institucional', titulo:'Comercial & Mercado', desc:'CRM, segmentação de clientes, contratos, marca internacional, estudo de mercado e estratégia comercial.'},
+  {id:'ma',       num:'13', ico:'⇲',  grupo:'Transação',    titulo:'Preparação para M&A', desc:'Data room, vendor due diligence, modelo financeiro, investor deck, assessor financeiro e preparo dos sócios.'},
+  {id:'deb',      num:'14', ico:'₪',  grupo:'Transação',    titulo:'Emissão de Debêntures', desc:'Rating, programa na CVM, coordenadores, escritura, agente fiduciário e capacidade de covenants.'},
 ];
+const TEMA_GRUPOS = ['Início','Fundação','Controles Internos','Capacidade Institucional','Transação'];
+function tema(id){return TEMAS.find(t=>t.id===id);}
 
-/* ---------- CAMADAS DO OBJETIVO 1 (ordem fixa 1→7) ---------- */
-const CAMADAS = [
-  {id:'c1',n:1,short:'Pessoas e Organização',        full:'Pessoas e Organização'},
-  {id:'c2',n:2,short:'Processos e Operações',         full:'Processos e Operações'},
-  {id:'c3',n:3,short:'Financeiro',                    full:'Financeiro (base do FP&A)'},
-  {id:'c4',n:4,short:'Ativos, Passivos e Riscos Ocultos', full:'Ativos, Passivos e Riscos Ocultos'},
-  {id:'c5',n:5,short:'Comercial e Mercado',           full:'Comercial e Mercado'},
-  {id:'c6',n:6,short:'Sistemas e Dados',              full:'Sistemas e Dados'},
-  {id:'c7',n:7,short:'Cultural',                      full:'Cultural'},
-];
-
-/* ---------- SEED (sub-tarefas do V1) ---------- */
+/* ---------- SEED — Preparação Institucional para Valuation & M&A ----------
+   11 blocos do roadmap + 18 controles internos do guia (Bloco 4). Tarefas enxutas. */
 function seedTasks(){
+  const T=(escopo,titulo,desc,prioridade,done)=>({id:uid(),escopo,titulo,desc,prioridade:prioridade||'mid',done:!!done,data:null,responsavel:'',gcal:false,camada:null,framework:null,tipo:'mapear',rotinaId:null,criadoEm:'seed'});
+  return [
+    // ===== AÇÃO IMEDIATA · 2 SEMANAS =====
+    T('imediato','Reunir sócios e alinhar o roadmap','Conversa franca sobre a jornada de profissionalização. Alinhamento entre sócios é pré-requisito para começar.','urgent'),
+    T('imediato','Diagnóstico honesto do estado atual','Avaliar o gap entre o que a empresa é hoje e o que precisa ser, em cada um dos temas. Isso vira o roadmap detalhado.','urgent'),
+    T('imediato','Definir orçamento de 3 anos para o projeto','Tratar como projeto formal, com responsável (CFO), PMO, marcos e métricas.','urgent'),
+    T('imediato','Contratar as 3 assessorias críticas','Advocacia societária/M&A com track record, auditoria (Big Four ou tier 2) e headhunter para o CFO.','urgent'),
+    T('imediato','Comunicar a nova fase à liderança','Sem citar M&A/captação (sigiloso): comunicar que a empresa entra em nova fase de maturidade e todos elevam o padrão.','high'),
+
+    // ===== BLOCO 1 · GOVERNANÇA SOCIETÁRIA & JURÍDICO =====
+    T('gov','Estruturar holding + operacional de forma limpa','Holding familiar segurando participação na operacional. Desfazer empresas cruzadas, mútuos entre elas e ativos misturados PF/PJ.','urgent'),
+    T('gov','Converter a operacional para S.A.','Pré-requisito absoluto para emissão de debêntures e amplia as opções de M&A. Requer estatuto, assembleia inaugural e publicação.','high'),
+    T('gov','Elaborar acordo de acionistas robusto','Governança, transferência de ações (preferência, tag along, drag along), saída de sócio, sucessão, dividendos e arbitragem.','high'),
+    T('gov','Regularizar pendências societárias históricas','Atas, alterações não averbadas, cessões informais e dividendos sem formalização. Comprador audita 10 anos de histórico.','high'),
+    T('gov','Formalizar a propriedade intelectual','Marcas no INPI, domínios e direitos sobre embalagens/receitas no nome da empresa — nunca no CPF do sócio.','high'),
+    T('gov','Manter compliance societário permanente','Livros societários atualizados, digitalizados e indexados; toda decisão relevante em ata registrada.','mid'),
+
+    // ===== BLOCO 2 · CONTABILIDADE & REPORTE =====
+    T('contab','Contratar auditoria Big Four ou tier 2','Demonstrações auditadas por PwC/KPMG/Deloitte/EY ou Grant Thornton/BDO/Mazars. Base para mercado de capitais e M&A.','urgent'),
+    T('contab','Adotar IFRS full','Aplicar IFRS integralmente (IFRS 15/16, CPC 47 e CPC 06 R2). Muda as demonstrações materialmente; exige ajustes retroativos.','high'),
+    T('contab','Construir histórico de 3 anos auditados','Compradores e emissores querem 3 anos auditados. Isso define o horizonte de preparação — planeje conforme.','high'),
+    T('contab','Preparar-se para os ajustes do 1º ano de auditoria','Provisões, reconhecimento de receita, vidas úteis do imobilizado, ativos fiscais diferidos. É normal e esperado.','mid'),
+    T('contab','Produzir demonstrações em padrão internacional','Além de BP e DRE: DFC (direto e indireto), DMPL, DVA e notas explicativas completas seguindo os CPC.','high'),
+    T('contab','Implantar fechamento mensal em até 10 dias úteis','Sistemas, processos e equipe para fechar rápido — exigência do comprador durante o processo.','high'),
+    T('contab','Montar contabilidade gerencial','DRE por produto/região/canal/cliente, margem por SKU, custo unitário, fixos vs. variáveis, contribuição por unidade.','high'),
+    T('contab','Instituir reconciliações rigorosas','Bancos diário; contas a receber/pagar com aging semanal; estoque com contagem cíclica mensal; imobilizado anual; impostos mensal.','mid'),
+    T('contab','Calcular provisões adequadas','PDD estatística, contingências (trab./cível/tributária) revistas trimestralmente, obsolescência de estoque, bônus/PLR.','mid'),
+
+    // ===== BLOCO 3 · TRIBUTÁRIO =====
+    T('trib','Auditoria tributária preventiva','Escritório especializado (não o contador atual): enquadramento, obrigações acessórias e legislações estaduais/municipais.','high'),
+    T('trib','Regularizar passivos tributários','Definir estratégia (à vista com desconto, parcelamento ou discussão). Passivo em aberto derruba o múltiplo integral no preço.','high'),
+    T('trib','Otimização tributária lícita','Créditos de PIS/COFINS, benefícios regionais (SUDENE/SUDAM), holding para dividendos e créditos acumulados de ICMS.','mid'),
+    T('trib','Documentar todas as posições tributárias','Parecer jurídico externo para cada posição discutível — defesa contra autuação e conforto na due diligence.','mid'),
+    T('trib','Modelar o impacto da reforma tributária','IBS e CBS (2026→2033). Modelar o impacto por setor e ajustar a estratégia.','mid'),
+    T('trib','Revisão trimestral de créditos e débitos fiscais','O imposto é a conta que a empresa calcula sozinha e o Estado confere depois com juros. Recuperar crédito hoje vs. autuação amanhã.','high'),
+    T('trib','Análise de operações fiscais atípicas','O risco mora no que aconteceu uma única vez. Revisar operações fora do padrão parametrizado.','mid'),
+
+    // ===== BLOCO 4 · AMBIENTE DE CONTROLE (COSO + guia) =====
+    T('ambiente','Código de Ética e Conduta formalizado','Remove a ambiguidade e cria prova de ciência; assinado por todos os colaboradores.','high'),
+    T('ambiente','Segregação formal de funções críticas','Separar funções protege quem hoje acumula. Ninguém executa uma transação completa sozinho.','high'),
+    T('ambiente','Canal de denúncia anônima','Infraestrutura permanente, gestão por terceiro para credibilidade e garantia de anonimato.','high'),
+    T('ambiente','Declaração anual de conflito de interesse','De todos e todo ano — é isso que a torna capaz de perguntar o que, individualmente, seria impossível.','mid'),
+    T('ambiente','Independência da Controladoria concedida','Único controle que só o sócio majoritário pode conceder, e a base de todos os outros.','urgent'),
+    T('ambiente','Formalizar a matriz de controles internos (COSO 2013)','Processos críticos, riscos e controles por ciclo (receita, compra, estoque, folha, imobilizado, tesouraria). Documento vivo, testado.','high'),
+    T('ambiente','Formalizar alçadas de aprovação','Manual definindo quem aprova o quê e em que valor; dupla assinatura bancária acima de limites. Documentado e auditado.','mid'),
+    T('ambiente','Política anticorrupção (Lei 12.846 / FCPA)','Anticorrupção, conflito de interesses, brindes e hospitalidade. Assinada e treinada periodicamente.','mid'),
+    T('ambiente','Implementar compliance com LGPD','Mapa de dados pessoais, base legal por tratamento, política de privacidade, DPO nomeado e atendimento a titulares.','high'),
+    T('ambiente','Estruturar auditoria interna','Função (interna ou terceirizada) que testa controles e reporta ao conselho/comitê de auditoria. Sinal de maturidade.','mid'),
+    T('ambiente','Programa de integridade documentado','Treinamento anual obrigatório, canal operante, investigações formalizadas e aplicação consistente de consequências.','mid'),
+
+    // ===== BLOCO 4 · COMPRAS & PAGAMENTOS (guia) =====
+    T('compras','Reconciliação mensal de fornecedores circularizada','Conciliar o razão contra o Winthor prova que os números batem entre si; circularizar prova que batem com o outro lado.','high'),
+    T('compras','Regra dos três orçamentos obrigatória','Exigir três cotações não desconfia do comprador — dá a ele a prova de que comprou bem.','mid'),
+    T('compras','Segregação de funções em pagamentos','Separar quem paga de quem concilia não é vigiar o Financeiro — é blindá-lo.','high'),
+    T('compras','Análise de adiantamentos a fornecedores','Para cada adiantamento, qual contrato traz o dinheiro de volta — e quando. Dinheiro fora de casa é risco.','urgent'),
+    T('compras','Aprovação em duplo nível para desembolsos altos','Só é controle quando os dois aprovadores não respondem um ao outro; senão é assinatura e carimbo.','mid'),
+
+    // ===== BLOCO 4 · RECEITAS (guia) =====
+    T('receitas','Análise de descontos e devoluções','Com margem líquida fina, o desconto decide o lucro. Controlar concessão e monitorar devoluções.','high'),
+    T('receitas','Reconciliação de recebimentos bancários','A pergunta que pega o desvio é a inversa: toda baixa de título tem crédito correspondente no banco?','high'),
+
+    // ===== BLOCO 4 · CONTROLES CONTÁBEIS (guia) =====
+    T('contabil','Revisão de lançamentos manuais','O lançamento manual é a única linha que nasce de uma decisão, não de um fato — por ali o resultado é reescrito. Revisar todos.','high'),
+    T('contabil','Conciliação de contas patrimoniais críticas','Cada saldo do balanço é uma afirmação sobre o mundo físico. Conciliar é a única forma de comprová-la.','high'),
+    T('contabil','Operações intercompany documentadas','Toda operação entre as duas empresas existe duas vezes, em direções opostas. Casar as duas pontas.','high'),
+    T('contabil','Revisão de partes relacionadas','Sem o atrito comprador × vendedor, o preço precisa ser justificado formalmente.','mid'),
+
+    // ===== BLOCO 5 · GESTÃO DE RISCOS =====
+    T('riscos','Matriz de riscos corporativos','Riscos estratégicos/operacionais/financeiros/regulatórios/reputacionais por probabilidade × impacto; apetite e mitigação. Revisão anual.','high'),
+    T('riscos','Política de hedge cambial','Se exportar: % da receita em moeda estrangeira a ser hedgeada, instrumentos (NDF, opções, swaps), horizonte e contrapartes.','mid'),
+    T('riscos','Política de hedge de commodity (café)','Hedge do café verde via bolsa (ICE Futures NY): estoque a ser hedgeado, horizonte e tolerância a variações.','mid'),
+    T('riscos','Política de risco de crédito de clientes','Limites, prazos e garantias; seguro de crédito para grandes contas; diversificação (nenhum cliente acima de ~10% do faturamento).','high'),
+    T('riscos','Gestão de risco de fornecedores','Diversificar (nenhum crítico único), contratos formais, planos de contingência e compliance (responsabilidade subsidiária).','mid'),
+    T('riscos','Programa de seguros adequado','Patrimonial, responsabilidade civil, operacional, D&O, vida em grupo e crédito à exportação. Revisão periódica por corretora especializada.','mid'),
+    T('riscos','Plano de continuidade de negócios','Cenários: fábrica destruída, TI fora do ar, executivo-chave incapacitado, fornecedor crítico falido. Testado por simulação, não só escrito.','mid'),
+
+    // ===== BLOCO 6 · SISTEMAS & TECNOLOGIA =====
+    T('sistemas','ERP integrado e moderno','SAP/Oracle/TOTVS tier 1 integrando financeiro, contábil, fiscal, compras, vendas, estoque, produção e RH. Eliminar planilhas críticas.','high'),
+    T('sistemas','Business Intelligence estruturado','Power BI/Tableau/Qlik sobre data warehouse consolidado; dashboards para conselho/diretoria/gerência e KPIs quase em tempo real.','mid'),
+    T('sistemas','Sistema de gestão de qualidade certificado','ISO 9001 no mínimo; para alimentos, FSSC 22000/BRC/SQF conforme os mercados-alvo.','high'),
+    T('sistemas','Sistema de rastreabilidade','Da origem à prateleira. Rastreabilidade baseada em blockchain vira padrão no café specialty.','mid'),
+    T('sistemas','Cybersecurity','Política de segurança da informação, pentest periódico, backup redundante e testado, resposta a incidentes e treino antiphishing.','high'),
+    T('sistemas','Digitalização de processos','Notas eletrônicas, aprovações digitais com trilha auditável, workflows automatizados, assinatura digital e GED com retenção.','mid'),
+
+    // ===== BLOCO 7 · PESSOAS & CULTURA =====
+    T('pessoas','Contratar CFO qualificado','Prioridade absoluta. Experiência prévia em empresas maiores e em M&A/captação/IPO. Sem ele, tudo recai sobre o dono.','urgent'),
+    T('pessoas','Organograma formal com descrição de cargos','Cada posição com responsabilidades, métricas de desempenho, senioridade e faixa salarial.','high'),
+    T('pessoas','Plano de sucessão para posições críticas','Para cada posição-chave, quem é o backup. Sem backup, o comprador precifica risco de saída pós-aquisição.','high'),
+    T('pessoas','Reduzir a dependência do dono','Migrar o dono de executivo operacional para chairman estratégico; gestão profissional com autonomia real.','high'),
+    T('pessoas','Estruturar conselho de administração','Mínimo 3 membros, ao menos 1 independente com credenciais. Reuniões trimestrais com atas formais.','high'),
+    T('pessoas','Criar comitês de suporte ao conselho','Auditoria (crítico para debêntures), pessoas & remuneração e estratégia. Cada um com estatuto próprio.','mid'),
+    T('pessoas','Estruturar política de remuneração','Bandas salariais por nível (pesquisa de mercado), bônus por desempenho e PLR; stock options/phantom shares para executivos-chave.','mid'),
+    T('pessoas','Programa de treinamento e desenvolvimento','Universidade corporativa ou parceria com escolas de negócios; plano de desenvolvimento individual por gestor.','mid'),
+    T('pessoas','Documentar e medir a cultura','Missão/visão/valores vividos, pesquisa de clima anual com follow-up, NPS de colaboradores e rotatividade monitorada e baixa.','mid'),
+
+    // ===== BLOCO 8 · OPERAÇÕES & SUPRIMENTOS =====
+    T('operacoes','Documentação completa de processos','Todo processo crítico em fluxograma detalhado com POPs escritos, versionados e acessíveis.','high'),
+    T('operacoes','KPIs operacionais rigorosos','OEE, OTIF, qualidade (defeitos/milhão, reclamações), ciclo de caixa, giro de estoque e custos unitários. Metas mensais.','high'),
+    T('operacoes','Certificações de qualidade adicionais','BRC, IFS Food, SQF; FSSC 22000 para exportação; Rainforest Alliance ou Fair Trade para o mercado premium sustentável.','mid'),
+    T('operacoes','Rastreabilidade da origem','Rastrear cada lote até a fazenda, com práticas agrícolas e dados de safra. Exigência EUDR (UE) sobre desmatamento.','high'),
+    T('operacoes','Sustentabilidade e ESG documentados','Emissões (Escopo 1/2/3), água, resíduos, programas sociais, diversidade e governança. Relatório GRI/SASB/ISSB.','mid'),
+    T('operacoes','Gestão profissional de suprimentos','Contratos formais, política de compras, categorização de fornecedores, estratégia de sourcing e monitoramento de desempenho.','mid'),
+    T('operacoes','Manutenção preventiva','Programa formal com histórico documentado. Sair do modo corretivo reduz o risco operacional.','mid'),
+
+    // ===== BLOCO 9 · COMERCIAL & MERCADO =====
+    T('comercial','CRM implementado e usado','Salesforce/HubSpot ou equivalente, com histórico de todas as interações e pipeline visível e mensurado.','high'),
+    T('comercial','Base de clientes segmentada e analisada','Concentração, curva ABC/Pareto, rentabilidade por cliente, lifetime value e churn.','high'),
+    T('comercial','Contratos formais com clientes principais','Longo prazo onde possível, exclusividade onde aplicável e renovações antecipadas. Aumentam a previsibilidade da receita.','mid'),
+    T('comercial','Marca protegida internacionalmente','Registro nos mercados-alvo via Sistema de Madrid (INPI). Começar cedo — o processo é longo.','mid'),
+    T('comercial','Estudo de mercado formalizado','Mercado endereçável, market share, tendências e concorrentes, por consultoria séria (Kantar/Nielsen/Euromonitor).','mid'),
+    T('comercial','Estratégia comercial documentada','Plano estratégico por região/canal/produto/ano — não uma planilha de metas, mas por que e como a empresa vai crescer.','mid'),
+
+    // ===== BLOCO 10 · PREPARAÇÃO PARA M&A =====
+    T('ma','Preparar o data room virtual (VDR)','Documentação organizada por tema: societário, financeiro, tributário, trabalhista, comercial, operacional, TI, PI, contratos, contingências.','high'),
+    T('ma','Vendor Due Diligence proativo','Contratar a própria due diligence antes do comprador: identifica e resolve problemas preventivamente e acelera o processo.','mid'),
+    T('ma','Construir modelo financeiro robusto','Projeção de 5-10 anos, 3 cenários, premissas documentadas, sensibilidades e valuation por múltiplas metodologias (DCF, múltiplos, precedentes).','high'),
+    T('ma','Investor deck profissional','40-60 slides: história, mercado, estratégia, financeiros, projeções e tese de investimento, com design profissional.','mid'),
+    T('ma','Contratar assessor financeiro (banco de investimento)','Conduz o processo, cria competição entre compradores e negocia melhores termos. Contratar quando decidir mover.','mid'),
+    T('ma','Preparação psicológica e alinhamento dos sócios','Processo intenso de 6-18 meses. Sócios preparados e alinhados sobre objetivos, limites e continuidade pós-transação.','mid'),
+
+    // ===== BLOCO 11 · EMISSÃO DE DEBÊNTURES =====
+    T('deb','Obter rating de crédito','Agência de rating (Fitch/S&P/Moody\'s; Austin/Liberum). O rating define o spread; a meta é investment grade doméstico.','high'),
+    T('deb','Registrar programa de emissão na CVM','Se planeja múltiplas emissões, o programa agiliza cada uma. Requer estatuto, aprovações societárias e documentação regulatória.','mid'),
+    T('deb','Estruturar com coordenadores','Banco de investimento como coordenador líder: estrutura a operação, faz o roadshow e o bookbuilding.','mid'),
+    T('deb','Negociar a escritura de emissão','Documento de 100-200 páginas com escritório de mercado de capitais, equilibrando flexibilidade do emissor e proteção dos investidores.','mid'),
+    T('deb','Contratar agente fiduciário e escriturador','Participantes obrigatórios da estrutura (ex.: Vórtx/Simplific/Oliveira Trust + escriturador).','mid'),
+    T('deb','Garantir capacidade de manter covenants','Tipicamente Dívida Líquida/EBITDA abaixo de 3,0-3,5x e EBITDA/Despesa Financeira acima de 2,0-3,0x. Desalavancar antes se preciso.','high'),
+  ];
+}
+function seedTasksOLD_unused(){
   const S=(escopo,titulo,desc,prioridade,done)=>({id:uid(),escopo,titulo,desc,prioridade,done:!!done,data:null,responsavel:'',gcal:false,camada:null,framework:null,tipo:'mapear',rotinaId:null,criadoEm:'seed'});
-  // O1: helper para Objetivo 1 (camada, tipo, framework)
   const O1=(camada,tipo,titulo,desc,prioridade,framework,done)=>({id:uid(),escopo:'obj1',titulo,desc,prioridade,done:!!done,data:null,responsavel:'',gcal:false,camada:camada||null,framework:framework||null,tipo:tipo||'mapear',rotinaId:null,criadoEm:'seed'});
   return [
     // ===== OBJ 1 — MAPEAMENTO TOTAL (7 camadas + estruturar) =====
@@ -475,10 +619,10 @@ function packDocProc(){
     D('12','Respeitar a realidade acima da metodologia','Se a ferramenta ou o método conflita com o processo real (ex.: o método proíbe loop e seu processo tem loop) — o método cede. Fidelidade ao real é a fonte única de valor da documentação.','Regra de ouro'),
   ];
 }
-const PACKS={docproc:packDocProc};
+const PACKS={};  // pacotes desativados nesta versão (conteúdo agora vem do seed dos temas)
 
 /* ---------- STATE ---------- */
-const STORE_KEY='cafe_tarefas_v3';
+const STORE_KEY='cafe_tarefas_v4';
 function uid(){return 't'+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);}
 let state=load();
 function load(){
@@ -544,34 +688,40 @@ function inCurrentWeek(iso){if(!iso)return false;const[mon,sun]=weekRange(new Da
 /* ---------- HELPERS ---------- */
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 const PRIO_LABEL={urgent:'Urgente',high:'Alta',mid:'Média',low:'Baixa',dep:'Depende'};
-function scopeLabel(id){if(id==='semana')return'Tarefa da Semana';const o=OBJETIVOS.find(o=>o.id===id);return o?('Obj '+o.num+' · '+o.titulo):'—';}
-function scopeShort(id){if(id==='semana')return'Semana';const o=OBJETIVOS.find(o=>o.id===id);return o?('Obj '+o.num):'—';}
+function scopeLabel(id){if(id==='semana')return'Tarefa da Semana';const o=tema(id);return o?o.titulo:'—';}
+function scopeShort(id){if(id==='semana')return'Semana';const o=tema(id);return o?o.titulo:'—';}
 
 /* =========================================================================
    NAV / ROUTING
    ========================================================================= */
-const VIEWS=[
-  {id:'dashboard',ico:'◆',label:'Dashboard'},
-  {id:'obj1',ico:'❶',label:'Mapeamento Total'},
-  {id:'obj2',ico:'❷',label:'FP&A'},
-  {id:'obj3',ico:'❸',label:'Planej. Estratégico'},
-  {id:'obj4',ico:'❹',label:'Reorganização'},
-  {id:'calendario',ico:'▦',label:'Calendário'},
-];
-let current='dashboard';
+let current='indice';
 let calRef=new Date();
 let obj1Filter='todas';
 
+function navItemHtml(id,ico,label,badge){
+  return `<div class="nav-item ${current===id?'active':''}" data-view="${id}">
+    <span class="nav-ico">${ico}</span><span>${label}</span>${badge||''}</div>`;
+}
 function renderNav(){
   const nav=document.getElementById('nav');
-  nav.innerHTML=VIEWS.map(v=>{
-    let badge='';
-    if(v.id==='dashboard'){const n=weekTasks().filter(t=>!t.done).length;badge=`<span class="nav-badge">${n}</span>`;}
-    else if(v.id.startsWith('obj')){const ts=state.tarefas.filter(t=>t.escopo===v.id);const done=ts.filter(t=>t.done).length;badge=`<span class="nav-mini">${done}/${ts.length}</span>`;}
-    else if(v.id==='calendario'){const n=state.tarefas.filter(t=>t.data&&!t.done).length;badge=n?`<span class="nav-badge">${n}</span>`:'';}
-    return `<div class="nav-item ${current===v.id?'active':''}" data-view="${v.id}">
-      <span class="nav-ico">${v.ico}</span><span>${v.label}</span>${badge}</div>`;
-  }).join('');
+  let h='';
+  // fixos
+  h+=navItemHtml('indice','☰','Índice');
+  const wp=weekTasks().filter(t=>!t.done).length;
+  h+=navItemHtml('dashboard','◆','Dashboard',`<span class="nav-badge">${wp}</span>`);
+  const cd=state.tarefas.filter(t=>t.data&&!t.done).length;
+  h+=navItemHtml('calendario','▦','Calendário',cd?`<span class="nav-badge">${cd}</span>`:'');
+  // temas agrupados
+  TEMA_GRUPOS.forEach(g=>{
+    const its=TEMAS.filter(t=>t.grupo===g);
+    if(!its.length)return;
+    h+=`<div class="nav-label">${esc(g)}</div>`;
+    its.forEach(t=>{
+      const ts=state.tarefas.filter(x=>x.escopo===t.id);const done=ts.filter(x=>x.done).length;
+      h+=navItemHtml(t.id,t.ico,t.titulo,`<span class="nav-mini">${done}/${ts.length}</span>`);
+    });
+  });
+  nav.innerHTML=h;
   nav.querySelectorAll('.nav-item').forEach(el=>el.onclick=()=>go(el.dataset.view));
 }
 function go(v){current=v;renderNav();render();window.scrollTo({top:0,behavior:'smooth'});}
@@ -619,9 +769,11 @@ function routineInstances(){
    ========================================================================= */
 function render(){
   const m=document.getElementById('main');
-  if(current==='dashboard')m.innerHTML=viewDashboard();
+  if(current==='indice')m.innerHTML=viewIndice();
+  else if(current==='dashboard')m.innerHTML=viewDashboard();
   else if(current==='calendario')m.innerHTML=viewCalendar();
-  else m.innerHTML=viewObjetivo(current);
+  else if(tema(current))m.innerHTML=viewTema(current);
+  else {current='indice';m.innerHTML=viewIndice();}
   wire();
   updateBadges();
 }
@@ -657,8 +809,8 @@ function viewDashboard(){
   const ri=routineInstances();
   const riPend=ri.filter(r=>!r.done);
   const allDone=state.tarefas.filter(t=>t.done).length;
-  const objProg=OBJETIVOS.map(o=>{const ts=state.tarefas.filter(t=>t.escopo===o.id);return ts.length?Math.round(ts.filter(t=>t.done).length/ts.length*100):0;});
-  const avgProg=Math.round(objProg.reduce((a,b)=>a+b,0)/objProg.length);
+  const allTotal=state.tarefas.length;
+  const avgProg=allTotal?Math.round(allDone/allTotal*100):0;
   const[mon,sun]=weekRange(new Date());
 
   // ordena pendentes por prioridade
@@ -670,7 +822,7 @@ function viewDashboard(){
       <div>
         <div class="page-eyebrow">Painel Central · Semana ${isoWeekNum(new Date())}</div>
         <h1 class="page-title">Tarefas da <em>Semana</em></h1>
-        <p class="page-lead">O que precisa acontecer entre ${fmtBR(isoOf(mon))} e ${fmtBR(isoOf(sun))} — objetivos macro, avulsas e rotina.</p>
+        <p class="page-lead">O que precisa acontecer entre ${fmtBR(isoOf(mon))} e ${fmtBR(isoOf(sun))} — urgências dos temas, avulsas e rotina.</p>
       </div>
       <button class="btn primary" data-add="semana">+ Nova tarefa</button>
     </div>
@@ -678,8 +830,8 @@ function viewDashboard(){
     <div class="stats">
       <div class="stat"><div class="stat-num">${pend.length}</div><div class="stat-label">Pendentes na semana</div><div class="stat-detail">${doneWeek.length} concluídas</div></div>
       <div class="stat"><div class="stat-num">${riPend.length}</div><div class="stat-label">Afazeres de rotina</div><div class="stat-detail">${state.rotinas.filter(r=>r.ativo!==false).length} rotinas ativas</div></div>
-      <div class="stat"><div class="stat-num">${avgProg}%</div><div class="stat-label">Progresso macro médio</div><div class="stat-detail">${allDone} de ${state.tarefas.length} tarefas</div></div>
-      <div class="stat"><div class="stat-num">${state.tarefas.filter(t=>t.prioridade==='urgent'&&!t.done).length}</div><div class="stat-label">Urgências abertas</div><div class="stat-detail">em todos os objetivos</div></div>
+      <div class="stat"><div class="stat-num">${avgProg}%</div><div class="stat-label">Progresso geral</div><div class="stat-detail">${allDone} de ${state.tarefas.length} tarefas</div></div>
+      <div class="stat"><div class="stat-num">${state.tarefas.filter(t=>t.prioridade==='urgent'&&!t.done).length}</div><div class="stat-label">Urgências abertas</div><div class="stat-detail">em todos os temas</div></div>
     </div>
 
     ${pend.filter(t=>t.prioridade==='urgent').length?`<div class="banner">🔥 <div><b>${pend.filter(t=>t.prioridade==='urgent').length} urgência(s)</b> na semana. Priorize antes das 17h30 (reuniões presenciais no café).</div></div>`:''}
@@ -775,88 +927,51 @@ function routineWeekTable(ri){
   return `<div class="rweek">${cells}</div>`;
 }
 
-/* ---------- OBJETIVO 1 · MAPEAMENTO EM CAMADAS ---------- */
-function viewObjetivo1(){
-  const o=OBJETIVOS[0];
-  const ts=state.tarefas.filter(t=>t.escopo==='obj1');
-  const done=ts.filter(t=>t.done).length;
-  const pct=ts.length?Math.round(done/ts.length*100):0;
-  const order={urgent:0,high:1,dep:2,mid:3,low:4};
-  const sortT=arr=>[...arr].sort((a,b)=>(a.done-b.done)||((order[a.prioridade]??5)-(order[b.prioridade]??5)));
-  const isMap=t=>(t.tipo||'mapear')!=='estruturar';
-  const f=obj1Filter;
-
-  // chips de filtro
-  const chips=[{id:'todas',lb:'Todas'},...CAMADAS.map(c=>({id:c.id,lb:'C'+c.n})),{id:'estruturar',lb:'Estruturar'}];
-  const chipsHtml=chips.map(c=>`<div class="fchip ${f===c.id?'on':''}" data-fchip="${c.id}">${c.lb}</div>`).join('');
-
-  const camBlock=(cid)=>{
-    const cam=CAMADAS.find(c=>c.id===cid);
-    const list=sortT(ts.filter(t=>isMap(t)&&t.camada===cid));
-    const d=list.filter(t=>t.done).length;
-    return `<div class="camada-block">
-      <div class="camada-head"><div class="camada-title"><span class="cn">Camada ${cam.n}</span> · ${esc(cam.short)}</div>
-        <div class="camada-prog">${d} de ${list.length} concluída${list.length===1?'':'s'}</div></div>
-      <div class="camada-line"></div>
-      <div class="panel" style="margin:0"><div class="panel-body">
-        ${list.length?list.map(taskRow).join(''):'<div class="empty" style="padding:20px"><span class="big">＋</span>Sem tarefas nesta camada ainda.</div>'}
-      </div></div>
-    </div>`;
-  };
-  const geralList=sortT(ts.filter(t=>isMap(t)&&!t.camada));
-  const geralBlock=`<div class="camada-block">
-    <div class="camada-head"><div class="camada-title"><span class="cn">Geral</span> · sem camada</div>
-      <div class="camada-prog">${geralList.filter(t=>t.done).length} de ${geralList.length} concluída${geralList.length===1?'':'s'}</div></div>
-    <div class="camada-line"></div>
-    <div class="panel" style="margin:0"><div class="panel-body">${geralList.map(taskRow).join('')}</div></div>
-  </div>`;
-  const est=sortT(ts.filter(t=>!isMap(t)));
-  const estHtml=`<div class="estruturar">
-    <div class="estruturar-head"><div class="estruturar-title">Estruturar <em>(curto prazo)</em></div>
-      <div class="estruturar-sub">Ações que emergem do mapeamento e caminham em paralelo.</div></div>
-    <div>${est.length?est.map(taskRow).join(''):'<div class="empty" style="padding:20px">Nenhuma ação estrutural ainda.</div>'}</div>
-  </div>`;
-
-  let sections='';
-  if(f==='estruturar'){sections=estHtml;}
-  else if(f!=='todas'){sections=camBlock(f);}
-  else{
-    if(geralList.length)sections+=geralBlock;
-    sections+=CAMADAS.map(c=>camBlock(c.id)).join('');
-    sections+=estHtml;
-  }
-
+/* ---------- ÍNDICE (hub) ---------- */
+function viewIndice(){
+  const total=state.tarefas.length, done=state.tarefas.filter(t=>t.done).length;
+  const pct=total?Math.round(done/total*100):0;
+  let groups='';
+  TEMA_GRUPOS.forEach(g=>{
+    const its=TEMAS.filter(t=>t.grupo===g); if(!its.length)return;
+    groups+=`<div class="idx-group"><div class="idx-group-h">${esc(g)}</div><div class="idx-grid">`;
+    its.forEach(t=>{
+      const ts=state.tarefas.filter(x=>x.escopo===t.id);const d=ts.filter(x=>x.done).length;
+      const p=ts.length?Math.round(d/ts.length*100):0;
+      const urg=ts.filter(x=>!x.done&&x.prioridade==='urgent').length;
+      groups+=`<div class="idx-card" data-goto="${t.id}">
+        <div class="idx-top"><span class="idx-ico">${t.ico}</span><span class="idx-num">${t.num}</span>${urg?`<span class="idx-urg">${urg} urgente${urg>1?'s':''}</span>`:''}</div>
+        <div class="idx-title">${esc(t.titulo)}</div>
+        <div class="idx-desc">${esc(t.desc)}</div>
+        <div class="obj-progress" style="margin-top:14px"><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>
+          <div class="progress-text"><strong>${p}%</strong> · ${d}/${ts.length}</div></div>
+      </div>`;
+    });
+    groups+='</div></div>';
+  });
   return `<div class="view">
-    <div class="page-eyebrow">Objetivo Macro 01</div>
-    <div class="obj-hero">
-      <div class="obj-num">01</div>
-      <div style="flex:1;min-width:0">
-        <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px">
-          <h1 class="page-title" style="font-size:30px;margin:0">${esc(o.titulo)}</h1>
-          <span class="obj-tag">${o.periodo}</span>
-        </div>
-        <p style="font-size:13.5px;color:var(--text-primary);line-height:1.6;max-width:820px">${esc(o.desc)}</p>
-        <div class="obj-progress">
-          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-          <div class="progress-text"><strong>${pct}%</strong> · ${done} de ${ts.length}</div>
-        </div>
+    <div class="page-head-row">
+      <div>
+        <div class="page-eyebrow">Índice · Preparação Institucional</div>
+        <h1 class="page-title">Roadmap de <em>Valuation & M&A</em></h1>
+        <p class="page-lead">A jornada de 24 a 36 meses que separa uma empresa vendida a 5x de uma vendida a 9x. Escolha um tema para trabalhar.</p>
       </div>
+      <button class="btn primary" data-goto="dashboard">Ir ao Dashboard →</button>
     </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px">
-      <div class="o1-filter">${chipsHtml}</div>
-      <button class="btn sm primary" data-add="obj1">+ Adicionar tarefa</button>
+    <div class="stats">
+      <div class="stat"><div class="stat-num">${TEMAS.length}</div><div class="stat-label">Temas</div><div class="stat-detail">em ${TEMA_GRUPOS.length} frentes</div></div>
+      <div class="stat"><div class="stat-num">${total}</div><div class="stat-label">Tarefas no total</div><div class="stat-detail">${done} concluídas</div></div>
+      <div class="stat"><div class="stat-num">${pct}%</div><div class="stat-label">Progresso geral</div><div class="stat-detail">preparação institucional</div></div>
+      <div class="stat"><div class="stat-num">${state.tarefas.filter(t=>!t.done&&t.prioridade==='urgent').length}</div><div class="stat-label">Urgências abertas</div><div class="stat-detail">fixadas no dashboard</div></div>
     </div>
-
-    ${sections}
+    ${groups}
     <div class="pattern-bar"></div>
   </div>`;
 }
 
-/* ---------- OBJETIVO ---------- */
-function viewObjetivo(id){
-  if(id==='obj1')return viewObjetivo1();
-  const o=OBJETIVOS.find(o=>o.id===id);
+/* ---------- TEMA (aba) ---------- */
+function viewTema(id){
+  const o=tema(id);
   const ts=state.tarefas.filter(t=>t.escopo===id);
   const done=ts.filter(t=>t.done).length;
   const pct=ts.length?Math.round(done/ts.length*100):0;
@@ -864,13 +979,12 @@ function viewObjetivo(id){
   const pend=ts.filter(t=>!t.done).sort((a,b)=>(order[a.prioridade]??5)-(order[b.prioridade]??5));
   const fin=ts.filter(t=>t.done);
   return `<div class="view">
-    <div class="page-eyebrow">Objetivo Macro ${o.num}</div>
+    <div class="page-eyebrow">${esc(o.grupo)} · Tema ${o.num}</div>
     <div class="obj-hero">
-      <div class="obj-num">${o.num}</div>
+      <div class="obj-num" style="font-size:40px">${o.ico}</div>
       <div style="flex:1;min-width:0">
         <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px">
-          <h1 class="page-title" style="font-size:30px;margin:0">${esc(o.titulo)}</h1>
-          <span class="obj-tag">${o.periodo}</span>
+          <h1 class="page-title" style="font-size:28px;margin:0">${esc(o.titulo)}</h1>
         </div>
         <p style="font-size:13.5px;color:var(--text-primary);line-height:1.6;max-width:820px">${esc(o.desc)}</p>
         <div class="obj-progress">
@@ -879,14 +993,13 @@ function viewObjetivo(id){
         </div>
       </div>
     </div>
-
     <div class="panel">
       <div class="panel-head">
-        <div class="panel-title"><span class="p-ico">◈</span> Tarefas do objetivo</div>
+        <div class="panel-title"><span class="p-ico">◈</span> Tarefas</div>
         <button class="btn sm primary" data-add="${id}">+ Adicionar tarefa</button>
       </div>
       <div class="panel-body">
-        ${pend.length?pend.map(taskRow).join(''):'<div class="empty"><span class="big">✓</span>Nenhuma tarefa pendente neste objetivo.</div>'}
+        ${pend.length?pend.map(taskRow).join(''):'<div class="empty"><span class="big">✓</span>Nenhuma tarefa pendente neste tema.</div>'}
         ${fin.map(taskRow).join('')}
       </div>
     </div>
@@ -963,6 +1076,8 @@ function wire(){
   m.querySelectorAll('[data-toggle]').forEach(el=>el.onclick=()=>{const t=state.tarefas.find(x=>x.id===el.dataset.toggle);if(t){t.done=!t.done;save();render();if(t.done)toast('Concluída ✓','ok');}});
   // routine check
   m.querySelectorAll('[data-rcheck]').forEach(el=>el.onclick=()=>{const k=el.dataset.rcheck;if(state.rotinaCheck[k])delete state.rotinaCheck[k];else state.rotinaCheck[k]=true;save();render();});
+  // navegação por cartões (índice) / atalhos
+  m.querySelectorAll('[data-goto]').forEach(el=>el.onclick=()=>go(el.dataset.goto));
   // add task
   m.querySelectorAll('[data-add]').forEach(el=>el.onclick=()=>openTaskModal(null,el.dataset.add,el.dataset.today?todayISO():undefined));
   // edit / delete
@@ -1004,7 +1119,7 @@ function openTaskModal(editId,defScope,defDate){
     tipo:t?(t.tipo||'mapear'):'mapear',
     framework:t?(t.framework||''):'',
   };
-  const scopes=[{id:'semana',title:'Tarefas da Semana',sub:'Só no dashboard'},...OBJETIVOS.map(o=>({id:o.id,title:'Obj '+o.num+' · '+o.titulo.split(' —')[0],sub:o.periodo}))];
+  const scopes=[{id:'semana',title:'Tarefas da Semana',sub:'Só no dashboard'},...TEMAS.map(o=>({id:o.id,title:o.titulo,sub:o.grupo}))];
   const rosterOpts=(()=>{
     const areas={};ROSTER.forEach(p=>{(areas[p.a]=areas[p.a]||[]).push(p);});
     let h=`<option value="">— Ninguém / eu mesmo —</option>`;
@@ -1036,27 +1151,6 @@ function openTaskModal(editId,defScope,defDate){
           <div class="field" style="margin:0"><label>Responsável</label><select id="fResp">${rosterOpts}</select></div>
         </div>
 
-        <div class="field" id="obj1Fields" style="display:${draft.escopo==='obj1'?'block':'none'}">
-          <label>Mapeamento (Objetivo 1)</label>
-          <div class="field-row">
-            <div class="field" style="margin:0"><label style="font-size:10px;letter-spacing:.06em">Camada</label>
-              <select id="fCamada">
-                <option value="">Sem camada (Geral)</option>
-                ${CAMADAS.map(c=>`<option value="${c.id}" ${draft.camada===c.id?'selected':''}>Camada ${c.n} — ${esc(c.full)}</option>`).join('')}
-              </select>
-            </div>
-            <div class="field" style="margin:0"><label style="font-size:10px;letter-spacing:.06em">Tipo</label>
-              <select id="fTipo">
-                <option value="mapear" ${draft.tipo!=='estruturar'?'selected':''}>Mapear</option>
-                <option value="estruturar" ${draft.tipo==='estruturar'?'selected':''}>Estruturar (curto prazo)</option>
-              </select>
-            </div>
-          </div>
-          <div class="field" style="margin:12px 0 0"><label style="font-size:10px;letter-spacing:.06em">Framework (opcional)</label>
-            <input type="text" id="fFramework" value="${esc(draft.framework)}" placeholder="9-Box, SWOT, Curva ABC, Análise Vertical, 7 Desperdícios...">
-          </div>
-        </div>
-
         <div class="field" style="margin-bottom:0"><label>Lembrete</label>
           <div class="gcal-ask ${draft.gcal?'on':''}" id="gcalAsk">
             <span class="ga-ico">📅</span>
@@ -1080,7 +1174,7 @@ function openTaskModal(editId,defScope,defDate){
   document.getElementById('mClose').onclick=closeModal;
   document.getElementById('mCancel').onclick=closeModal;
   ovl.onclick=(e)=>{if(e.target===ovl)closeModal();};
-  ovl.querySelectorAll('[data-scope]').forEach(el=>el.onclick=()=>{draft.escopo=el.dataset.scope;ovl.querySelectorAll('[data-scope]').forEach(x=>x.classList.toggle('on',x.dataset.scope===draft.escopo));const o1=document.getElementById('obj1Fields');if(o1)o1.style.display=draft.escopo==='obj1'?'block':'none';});
+  ovl.querySelectorAll('[data-scope]').forEach(el=>el.onclick=()=>{draft.escopo=el.dataset.scope;ovl.querySelectorAll('[data-scope]').forEach(x=>x.classList.toggle('on',x.dataset.scope===draft.escopo));});
   ovl.querySelectorAll('[data-p]').forEach(el=>el.onclick=()=>{draft.prioridade=el.dataset.p;ovl.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('on',x.dataset.p===draft.prioridade));});
   const gAsk=document.getElementById('gcalAsk');
   gAsk.onclick=()=>{draft.gcal=!draft.gcal;gAsk.classList.toggle('on',draft.gcal);};
@@ -1094,23 +1188,18 @@ function saveTask(){
   const data=document.getElementById('fData').value||null;
   const desc=document.getElementById('fDesc').value.trim();
   const responsavel=document.getElementById('fResp').value;
-  // Campos do Objetivo 1 (só quando escopo === 'obj1')
-  const isObj1=draft.escopo==='obj1';
-  const camada=isObj1?(document.getElementById('fCamada').value||null):null;
-  const tipo=isObj1?(document.getElementById('fTipo').value||'mapear'):'mapear';
-  const framework=isObj1?(document.getElementById('fFramework').value.trim()||null):null;
   // Lembrete Google Agenda precisa de uma data
   if(draft.gcal&&!data){toast('Escolha uma data para o lembrete do Google Agenda','info');document.getElementById('fData').focus();return;}
   let saved;
   if(draft.id){
     const t=state.tarefas.find(x=>x.id===draft.id);
     const jaLembrava=t.gcal&&t.data===data;
-    Object.assign(t,{titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal,camada,tipo,framework});
+    Object.assign(t,{titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal});
     saved=t;
     toast('Tarefa atualizada ✓','ok');
     if(draft.gcal&&data&&!jaLembrava)agendarGCal(t);
   }else{
-    saved={id:uid(),titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal,camada,tipo,framework,done:false,rotinaId:null,criadoEm:todayISO()};
+    saved={id:uid(),titulo,desc,prioridade:draft.prioridade,escopo:draft.escopo,data,responsavel,gcal:draft.gcal,camada:null,framework:null,tipo:'mapear',done:false,rotinaId:null,criadoEm:todayISO()};
     state.tarefas.push(saved);
     toast('Adicionada em '+scopeShort(draft.escopo)+(data?' · '+fmtBR(data):'')+' ✓','ok');
     if(draft.gcal&&data)agendarGCal(saved);
